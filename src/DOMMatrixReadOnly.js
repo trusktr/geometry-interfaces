@@ -1,0 +1,175 @@
+
+export default
+class DOMMatrixReadOnly {
+
+    /**
+     * @param {Array.number} numberSequence An array of numbers. If the array
+     * has 6 items, then those items set the values of m11, m12, m21, m22, m41,
+     * m42 in that order (or the values a, b, c, d, e, f if you're using those
+     * aliases) and this.is2D is true. If the array has 16 items (in
+     * column-major order), then they set all the values of the underlying
+     * matrix (m11 to m44) and this.is2D is set false. Arrays of other lengths
+     * throw an error.
+     */
+    constructor(numberSequence) {
+        if (! this instanceof DOMMatrix)
+            throw new TypeError(`Expected 'this' to be an instance of DOMMatrix. DOMMatrixReadOnly can't be instantiated directly.`)
+
+        // TODO, make these private: {{
+
+        // `this._matrix` defaults to the identity matrix.
+        // `this._matrix` is represented internally in row-major format so that
+        // it is easy to look at visually. In a pair of coordinates (as in
+        // "m23") the first number is the column and the second is the row (so
+        // "m23" means column 2 row 3).
+        this._matrix = new Float64Array([
+            /*m11*/1, /*m21*/0, /*m31*/0, /*m41*/0,
+            /*m12*/0, /*m22*/1, /*m32*/0, /*m42*/0,
+            /*m13*/0, /*m23*/0, /*m33*/1, /*m43*/0,
+            /*m14*/0, /*m24*/0, /*m34*/0, /*m44*/1,
+        ])
+        this._is2D = true
+        this._isIdentity = true
+
+        // }}
+
+        // TODO
+        if (!Match.test(numberSequence, [Number]))
+            throw new TypeError('DOMMatrixReadOnly constructor argument "numberSequence" must contain numbers.')
+
+        if (numberSequence.length === 6) {
+            this.m11 = numberSequence[0]
+            this.m12 = numberSequence[1]
+            this.m21 = numberSequence[2]
+            this.m22 = numberSequence[3]
+            this.m41 = numberSequence[4]
+            this.m42 = numberSequence[5]
+        }
+        else if (numberSequence.length === 16) {
+            this.m11 = numberSequence[0]
+            this.m12 = numberSequence[1]
+            this.m13 = numberSequence[2]
+            this.m14 = numberSequence[3]
+
+            this.m21 = numberSequence[4]
+            this.m22 = numberSequence[5]
+            this.m23 = numberSequence[6]
+            this.m24 = numberSequence[7]
+
+            this.m31 = numberSequence[8]
+            this.m32 = numberSequence[9]
+            this.m33 = numberSequence[10]
+            this.m34 = numberSequence[11]
+
+            this.m41 = numberSequence[12]
+            this.m42 = numberSequence[13]
+            this.m43 = numberSequence[14]
+            this.m44 = numberSequence[15]
+
+            this._is2D = false
+        }
+        else {
+            throw new TypeError('DOMMatrixReadOnly constructor argument "numberSequence" has invalid length.')
+        }
+    }
+
+    get is2D() {
+        return this._is2D
+    }
+
+    /*
+     * TODO: make sure this matches the spec.
+     * TODO: Instead of calculating here, perhaps calculate and set
+     * this._isIdentity in other operations, and simply return the internal one
+     * here.
+     */
+    get isIdentity() {
+        let identity = [
+            /*m11*/1, /*m21*/0, /*m31*/0, /*m41*/0,
+            /*m12*/0, /*m22*/1, /*m32*/0, /*m42*/0,
+            /*m13*/0, /*m23*/0, /*m33*/1, /*m43*/0,
+            /*m14*/0, /*m24*/0, /*m34*/0, /*m44*/1,
+        ]
+
+        this._isIdentity = true
+
+        for (var i = 0, len = this._matrix.length; i < len; i+=1) {
+            if (this._matrix[i] != identity[i])
+                this._isIdentity = false
+        }
+
+        return this._isIdentity
+    }
+
+    // Immutable transform methods -------------------------------------------
+
+    translate (tx, ty, tz = 0) {
+        return new DOMMatrix(this).translateSelf(tx, ty, tz)
+        // TODO: update to DOMMatrix.fromMatrix(this).
+    }
+
+    scale (scale, originX = 0, originY = 0) {}
+    scale3d (scale, originX = 0, originY = 0, originZ = 0) {}
+
+    scaleNonUniform (scaleX, scaleY = 1, scaleZ = 1, originX = 0, originY = 0, originZ = 0) {
+        this.m11 *= scaleX
+        this.m12 *= scaleX
+        this.m13 *= scaleX
+        this.m14 *= scaleX
+
+        this.m21 *= scaleY
+        this.m22 *= scaleY
+        this.m23 *= scaleY
+        this.m24 *= scaleY
+
+        this.m31 *= scaleZ
+        this.m32 *= scaleZ
+        this.m33 *= scaleZ
+        this.m34 *= scaleZ
+    }
+
+    rotate (angle, originX = 0, originY = 0) {}
+    rotateFromVector (x, y) {}
+    rotateAxisAngle (x, y, z, angle) {}
+    skewX (sx) {}
+    skewY (sy) {}
+    multiply (DOMMatrix other) {}
+    flipX () {}
+    flipY () {}
+    inverse () {}
+
+    //transformPoint(optional DOMPointInit point) // TODO
+
+    toFloat32Array() {}
+    toFloat64Array() {}
+
+    //stringifier() {} // What's this?
+
+
+    get a() { return this.m11 }
+    get b() { return this.m12 }
+    get c() { return this.m21 }
+    get d() { return this.m22 }
+    get e() { return this.m41 }
+    get f() { return this.m42 }
+
+    get m11() { return this._matrix[0]  }
+    get m12() { return this._matrix[4]  }
+    get m13() { return this._matrix[8]  }
+    get m14() { return this._matrix[12] }
+
+    get m21() { return this._matrix[1]  }
+    get m22() { return this._matrix[5]  }
+    get m23() { return this._matrix[9]  }
+    get m24() { return this._matrix[13] }
+
+    get m31() { return this._matrix[2]  }
+    get m32() { return this._matrix[6]  }
+    get m33() { return this._matrix[10] }
+    get m34() { return this._matrix[14] }
+
+    get m41() { return this._matrix[3]  }
+    get m42() { return this._matrix[7]  }
+    get m43() { return this._matrix[11] }
+    get m44() { return this._matrix[15] }
+}
