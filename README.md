@@ -13,8 +13,20 @@ In the box so far
 
 ### Interfaces
 
-- [DOMMatrixReadOnly](http://www.w3.org/TR/geometry-1/#DOMMatrix) (WIP)
-- [DOMMatrix](http://www.w3.org/TR/geometry-1/#DOMMatrix) (WIP)
+#### Work in progress
+
+- [DOMMatrixReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly)
+- [DOMMatrix](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix)
+
+#### Up next
+
+- [DOMPointReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly)
+- [DOMPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint)
+
+#### Under consideration
+
+- [DOMRectReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly)
+- [DOMRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect)
 
 Contributing
 ------------
