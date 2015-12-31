@@ -31,5 +31,8 @@ In the box so far
 Contributing
 ------------
 
-Consider making a pull request to add missing interfaces or APIs and help bring
-the web forward. :]
+I'm building this hastily right now, to get DOMMatrix up and running. There's
+plenty of easy-pickings to improve performance of the matrix calculations...
+
+Consider helping bring the web forward by making a pull request to add missing
+interfaces, APIs, or performance improvements. :]
