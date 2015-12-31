@@ -142,9 +142,33 @@ class DOMMatrix extends DOMMatrixReadOnly {
         return this
     }
 
-    rotateSelf (angle, originX = 0, originY = 0) {}
+    rotateSelf (angle, originX = 0, originY = 0) {
+        this.translateSelf(originX, originY)
+
+        // axis of rotation
+        let [x,y,z] = [0,0,1] // We're rotating around the Z axis.
+
+        let {sin, cos} = Math
+
+        this.multiplySelf(new DOMMatrix([
+            // TODO: should we provide a 6-item array here to signify 2D?
+            // TODO: angle is supplied in degrees. Do we need to convert to radians?
+            1-2*(y*y + z*z)*sin(angle/2)**2,                       2*(x*y*sin(angle/2)**2 + z*sin(angle/2)*cos(angle/2)), 2*(x*z*sin(angle/2)**2 - y*sin(angle/2)*cos(angle/2)), 0,
+            2*(x*y*sin(angle/2)**2 - z*sin(angle/2)*cos(angle/2)), 1-2*(x*x + z*z)*sin(angle/2)**2,                       2*(y*z*sin(angle/2)**2 + x*sin(angle/2)*cos(angle/2)), 0,
+            2*(x*z*sin(angle/2)**2 + y*sin(angle/2)*cos(angle/2)), 2*(y*z*sin(angle/2)**2 - x*sin(angle/2)*cos(angle/2)), 1-2*(x*x + y*y)*sin(angle/2)**2,                       0,
+            0,                                                     0,                                                     0,                                                     1,
+        ]))
+
+        this.translateSelf(-originX, -originY)
+        return this
+    }
+
     rotateFromVectorSelf (x, y) {}
-    rotateAxisAngleSelf (x, y, z, angle) {}
+
+    rotateAxisAngleSelf (x, y, z, angle) {
+
+    }
+
     skewXSelf (sx) {}
     skewYSelf (sy) {}
     invertSelf () {}

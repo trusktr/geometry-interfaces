@@ -69,7 +69,10 @@ class DOMMatrixReadOnly {
         return new DOMMatrix(this).scaleNonUniformSelf(scaleX, scaleY, scaleZ, originX, originY, originZ)
     }
 
-    rotate (angle, originX = 0, originY = 0) {}
+    rotate (angle, originX = 0, originY = 0) {
+        return new DOMMatrix(this).rotateSelf(angle, originX, originY)
+    }
+
     rotateFromVector (x, y) {}
     rotateAxisAngle (x, y, z, angle) {}
     skewX (sx) {}
