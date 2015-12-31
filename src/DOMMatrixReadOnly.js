@@ -1,3 +1,4 @@
+import DOMMatrix from './DOMMatrix'
 import {multiplyToArray, applyArrayValuesToDOMMatrix} from './utilities'
 
 export default
@@ -65,20 +66,7 @@ class DOMMatrixReadOnly {
     }
 
     scaleNonUniform (scaleX, scaleY = 1, scaleZ = 1, originX = 0, originY = 0, originZ = 0) {
-        this.m11 *= scaleX
-        this.m12 *= scaleX
-        this.m13 *= scaleX
-        this.m14 *= scaleX
-
-        this.m21 *= scaleY
-        this.m22 *= scaleY
-        this.m23 *= scaleY
-        this.m24 *= scaleY
-
-        this.m31 *= scaleZ
-        this.m32 *= scaleZ
-        this.m33 *= scaleZ
-        this.m34 *= scaleZ
+        return new DOMMatrix(this).scaleNonUniformSelf(scaleX, scaleY, scaleZ, originX, originY, originZ)
     }
 
     rotate (angle, originX = 0, originY = 0) {}
