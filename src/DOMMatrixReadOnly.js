@@ -74,7 +74,11 @@ class DOMMatrixReadOnly {
     }
 
     rotateFromVector (x, y) {}
-    rotateAxisAngle (x, y, z, angle) {}
+
+    rotateAxisAngle (x, y, z, angle) {
+        return new DOMMatrix(this).rotateAxisAngleSelf(x, y, z, angle)
+    }
+
     skewX (sx) {}
     skewY (sy) {}
 

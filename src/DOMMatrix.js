@@ -3,6 +3,7 @@ import {
     multiplyToArray,
     applyArrayValuesToDOMMatrix,
     matrixToArray,
+    rotateAxisAngleArray,
 } from './utilities'
 
 export default
@@ -148,16 +149,7 @@ class DOMMatrix extends DOMMatrixReadOnly {
         // axis of rotation
         let [x,y,z] = [0,0,1] // We're rotating around the Z axis.
 
-        let {sin, cos} = Math
-
-        this.multiplySelf(new DOMMatrix([
-            // TODO: should we provide a 6-item array here to signify 2D?
-            // TODO: angle is supplied in degrees. Do we need to convert to radians?
-            1-2*(y*y + z*z)*sin(angle/2)**2,                       2*(x*y*sin(angle/2)**2 + z*sin(angle/2)*cos(angle/2)), 2*(x*z*sin(angle/2)**2 - y*sin(angle/2)*cos(angle/2)), 0,
-            2*(x*y*sin(angle/2)**2 - z*sin(angle/2)*cos(angle/2)), 1-2*(x*x + z*z)*sin(angle/2)**2,                       2*(y*z*sin(angle/2)**2 + x*sin(angle/2)*cos(angle/2)), 0,
-            2*(x*z*sin(angle/2)**2 + y*sin(angle/2)*cos(angle/2)), 2*(y*z*sin(angle/2)**2 - x*sin(angle/2)*cos(angle/2)), 1-2*(x*x + y*y)*sin(angle/2)**2,                       0,
-            0,                                                     0,                                                     0,                                                     1,
-        ]))
+        this.rotateAxisAngleSelf(x, y, z, angle)
 
         this.translateSelf(-originX, -originY)
         return this
@@ -166,14 +158,15 @@ class DOMMatrix extends DOMMatrixReadOnly {
     rotateFromVectorSelf (x, y) {}
 
     rotateAxisAngleSelf (x, y, z, angle) {
-
+        this.multiplySelf(new DOMMatrix(rotateAxisAngleArray(x,y,z,angle)))
+        return this
     }
 
     skewXSelf (sx) {}
     skewYSelf (sy) {}
     invertSelf () {}
 
-    setMatrixValue(DOMString transformList)
+    setMatrixValue(/*DOMString*/ transformList) {}
 
     set a(value) { this.m11 = value }
     set b(value) { this.m12 = value }

@@ -89,3 +89,17 @@ function matrixToArray(matrix) {
 
     return result
 }
+
+export
+function rotateAxisAngleArray(x, y, z, angle) {
+    let {sin, cos} = Math
+
+    return [
+        // TODO: should we provide a 6-item array here to signify 2D?
+        // TODO: angle is supplied in degrees. Do we need to convert to radians?
+        1-2*(y*y + z*z)*sin(angle/2)**2,                       2*(x*y*sin(angle/2)**2 + z*sin(angle/2)*cos(angle/2)), 2*(x*z*sin(angle/2)**2 - y*sin(angle/2)*cos(angle/2)), 0,
+        2*(x*y*sin(angle/2)**2 - z*sin(angle/2)*cos(angle/2)), 1-2*(x*x + z*z)*sin(angle/2)**2,                       2*(y*z*sin(angle/2)**2 + x*sin(angle/2)*cos(angle/2)), 0,
+        2*(x*z*sin(angle/2)**2 + y*sin(angle/2)*cos(angle/2)), 2*(y*z*sin(angle/2)**2 - x*sin(angle/2)*cos(angle/2)), 1-2*(x*x + y*y)*sin(angle/2)**2,                       0,
+        0,                                                     0,                                                     0,                                                     1,
+    ]
+}
