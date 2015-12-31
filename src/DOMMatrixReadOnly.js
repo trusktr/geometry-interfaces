@@ -1,3 +1,4 @@
+import {multiplyToArray, applyArrayValuesToDOMMatrix} from './utilities'
 
 export default
 class DOMMatrixReadOnly {
@@ -38,38 +39,14 @@ class DOMMatrixReadOnly {
             throw new TypeError('DOMMatrixReadOnly constructor argument "numberSequence" must contain numbers.')
 
         if (numberSequence.length === 6) {
-            this.m11 = numberSequence[0]
-            this.m12 = numberSequence[1]
-            this.m21 = numberSequence[2]
-            this.m22 = numberSequence[3]
-            this.m41 = numberSequence[4]
-            this.m42 = numberSequence[5]
+            applyArrayValuesToDOMMatrix(numberSequence, this)
         }
         else if (numberSequence.length === 16) {
-            this.m11 = numberSequence[0]
-            this.m12 = numberSequence[1]
-            this.m13 = numberSequence[2]
-            this.m14 = numberSequence[3]
-
-            this.m21 = numberSequence[4]
-            this.m22 = numberSequence[5]
-            this.m23 = numberSequence[6]
-            this.m24 = numberSequence[7]
-
-            this.m31 = numberSequence[8]
-            this.m32 = numberSequence[9]
-            this.m33 = numberSequence[10]
-            this.m34 = numberSequence[11]
-
-            this.m41 = numberSequence[12]
-            this.m42 = numberSequence[13]
-            this.m43 = numberSequence[14]
-            this.m44 = numberSequence[15]
-
+            applyArrayValuesToDOMMatrix(numberSequence, this)
             this._is2D = false
         }
         else {
-            throw new TypeError('DOMMatrixReadOnly constructor argument "numberSequence" has invalid length.')
+            throw new TypeError('DOMMatrixReadOnly constructor argument "numberSequence" must have length 6 or 16.')
         }
     }
 
@@ -133,7 +110,11 @@ class DOMMatrixReadOnly {
     rotateAxisAngle (x, y, z, angle) {}
     skewX (sx) {}
     skewY (sy) {}
-    multiply (DOMMatrix other) {}
+
+    multiply (other) {
+        return new DOMMatrix(this).multiplySelf(other)
+    }
+
     flipX () {}
     flipY () {}
     inverse () {}

@@ -1,4 +1,9 @@
 import DOMMatrixReadOnly from './DOMMatrixReadOnly'
+import {
+    multiplyToArray,
+    applyArrayValuesToDOMMatrix,
+    matrixToArray,
+} from './utilities'
 
 export default
 class DOMMatrix extends DOMMatrixReadOnly {
@@ -15,21 +20,7 @@ class DOMMatrix extends DOMMatrixReadOnly {
             }
             else if (arguments[0] instanceof DOMMatrixReadOnly) {
                 let other = arguments[0]
-                if (other.is2D) {
-                    super([
-                        other.m11, other.m12,
-                        other.m21, other.m22,
-                        other.m41, other.m42,
-                    ])
-                }
-                else {
-                    super([
-                        other.m11, other.m12, other.m13, other.m14,
-                        other.m21, other.m22, other.m23, other.m24,
-                        other.m31, other.m32, other.m33, other.m34,
-                        other.m41, other.m42, other.m43, other.m44,
-                    ])
-                }
+                super(matrixToArray(other))
             }
             else if (arguments[0] instanceof Float32Array || arguments[0] instanceof Float64Array) {
                 let typedArray = arguments[0]
@@ -60,49 +51,16 @@ class DOMMatrix extends DOMMatrixReadOnly {
         if (! other instanceof DOMMatrixReadOnly)
             throw new Error('The argument to multiplySelf must be an instance of DOMMatrixReadOnly or DOMMatrix')
 
-        let m11 = this.m11 * other.m11 + this.m21 * other.m12 + this.m31 * other.m13 + this.m41 * other.m14
-        let m21 = this.m11 * other.m21 + this.m21 * other.m22 + this.m31 * other.m23 + this.m41 * other.m24
-        let m31 = this.m11 * other.m31 + this.m21 * other.m32 + this.m31 * other.m33 + this.m41 * other.m34
-        let m41 = this.m11 * other.m41 + this.m21 * other.m42 + this.m31 * other.m43 + this.m41 * other.m44
-
-        let m12 = this.m12 * other.m11 + this.m22 * other.m12 + this.m32 * other.m13 + this.m42 * other.m14
-        let m22 = this.m12 * other.m21 + this.m22 * other.m22 + this.m32 * other.m23 + this.m42 * other.m24
-        let m32 = this.m12 * other.m31 + this.m22 * other.m32 + this.m32 * other.m33 + this.m42 * other.m34
-        let m42 = this.m12 * other.m41 + this.m22 * other.m42 + this.m32 * other.m43 + this.m42 * other.m44
-
-        let m13 = this.m13 * other.m11 + this.m23 * other.m12 + this.m33 * other.m13 + this.m43 * other.m14
-        let m23 = this.m13 * other.m21 + this.m23 * other.m22 + this.m33 * other.m23 + this.m43 * other.m24
-        let m33 = this.m13 * other.m31 + this.m23 * other.m32 + this.m33 * other.m33 + this.m43 * other.m34
-        let m43 = this.m13 * other.m41 + this.m23 * other.m42 + this.m33 * other.m43 + this.m43 * other.m44
-
-        let m14 = this.m14 * other.m11 + this.m24 * other.m12 + this.m34 * other.m13 + this.m44 * other.m14
-        let m24 = this.m14 * other.m21 + this.m24 * other.m22 + this.m34 * other.m23 + this.m44 * other.m24
-        let m34 = this.m14 * other.m31 + this.m24 * other.m32 + this.m34 * other.m33 + this.m44 * other.m34
-        let m44 = this.m14 * other.m41 + this.m24 * other.m42 + this.m34 * other.m43 + this.m44 * other.m44
-
-        // XXX use setMatrixValue here?
-        this.m11 = m11
-        this.m12 = m12
-        this.m13 = m13
-        this.m14 = m14
-        this.m21 = m21
-        this.m22 = m22
-        this.m23 = m23
-        this.m24 = m24
-        this.m31 = m31
-        this.m32 = m32
-        this.m33 = m33
-        this.m34 = m34
-        this.m41 = m41
-        this.m42 = m42
-        this.m43 = m43
-        this.m44 = m44
+        let resultArray = multiplyToArray(this, other)
+        applyArrayValuesToDOMMatrix(resultArray, this)
 
         if (!other.is2D) this._is2D = false
 
         return this
     }
-    preMultiplySelf (DOMMatrix other) {}
+    preMultiplySelf (DOMMatrix other) {
+
+    }
 
     translateSelf (tx, ty, tz = 0) {
         // TODO: check args are numbers
@@ -111,12 +69,13 @@ class DOMMatrix extends DOMMatrixReadOnly {
             throw new Error('The first two arguments (X and Y translation values) are required (the third, Z translation, is optional).')
 
         // http://www.w3.org/TR/2012/WD-css3-transforms-20120911/#Translate3dDefined
-        let translationMatrix = [
-            /*m11*/1, /*m21*/0, /*m31*/0, /*m41*/tx,
-            /*m12*/0, /*m22*/1, /*m32*/0, /*m42*/ty,
-            /*m13*/0, /*m23*/0, /*m33*/1, /*m43*/tz,
-            /*m14*/0, /*m24*/0, /*m34*/0, /*m44*/1,
-        ]
+        let translationMatrix = new DOMMatrix([
+            // column-major:
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            tx,ty,tz,1,
+        ])
 
         this.multiplySelf(translationMatrix)
 
