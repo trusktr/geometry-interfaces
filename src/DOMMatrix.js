@@ -155,18 +155,31 @@ class DOMMatrix extends DOMMatrixReadOnly {
         return this
     }
 
-    rotateFromVectorSelf (x, y) {}
+    // TODO
+    rotateFromVectorSelf (x, y) {
+        throw new Error('rotateFromVectorSelf is not implemented yet.')
+    }
 
     rotateAxisAngleSelf (x, y, z, angle) {
         this.multiplySelf(new DOMMatrix(rotateAxisAngleArray(x,y,z,angle)))
         return this
     }
 
-    skewXSelf (sx) {}
-    skewYSelf (sy) {}
-    invertSelf () {}
+    skewXSelf (sx) {
+        throw new Error('skewXSelf is not implemented yet.')
+    }
 
-    setMatrixValue(/*DOMString*/ transformList) {}
+    skewYSelf (sy) {
+        throw new Error('skewYSelf is not implemented yet.')
+    }
+
+    invertSelf () {
+        throw new Error('invertSelf is not implemented yet.')
+    }
+
+    setMatrixValue(/*DOMString*/ transformList) {
+        throw new Error('setMatrixValue is not implemented yet.')
+    }
 
     set a(value) { this.m11 = value }
     set b(value) { this.m12 = value }

@@ -73,27 +73,44 @@ class DOMMatrixReadOnly {
         return new DOMMatrix(this).rotateSelf(angle, originX, originY)
     }
 
-    rotateFromVector (x, y) {}
+    // TODO
+    rotateFromVector (x, y) {
+        throw new Error('rotateFromVector is not implemented yet.')
+    }
 
     rotateAxisAngle (x, y, z, angle) {
         return new DOMMatrix(this).rotateAxisAngleSelf(x, y, z, angle)
     }
 
-    skewX (sx) {}
-    skewY (sy) {}
+    skewX (sx) {
+        throw new Error('skewX is not implemented yet.')
+    }
+    skewY (sy) {
+        throw new Error('skewY is not implemented yet.')
+    }
 
     multiply (other) {
         return new DOMMatrix(this).multiplySelf(other)
     }
 
-    flipX () {}
-    flipY () {}
-    inverse () {}
+    flipX () {
+        throw new Error('flipX is not implemented yet.')
+    }
+    flipY () {
+        throw new Error('flipY is not implemented yet.')
+    }
+    inverse () {
+        throw new Error('inverse is not implemented yet.')
+    }
 
     //transformPoint(optional DOMPointInit point) // TODO
 
-    toFloat32Array() {}
-    toFloat64Array() {}
+    toFloat32Array() {
+        throw new Error('toFloat32Array is not implemented yet.')
+    }
+    toFloat64Array() {
+        throw new Error('toFloat64Array is not implemented yet.')
+    }
 
     //stringifier() {} // What's this?
 
