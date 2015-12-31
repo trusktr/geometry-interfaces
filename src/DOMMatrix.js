@@ -59,7 +59,15 @@ class DOMMatrix extends DOMMatrixReadOnly {
         return this
     }
     preMultiplySelf (DOMMatrix other) {
+        if (! other instanceof DOMMatrixReadOnly)
+            throw new Error('The argument to multiplySelf must be an instance of DOMMatrixReadOnly or DOMMatrix')
 
+        let resultArray = multiplyToArray(other, this)
+        applyArrayValuesToDOMMatrix(resultArray, this)
+
+        if (!other.is2D) this._is2D = false
+
+        return this
     }
 
     translateSelf (tx, ty, tz = 0) {
@@ -86,8 +94,35 @@ class DOMMatrix extends DOMMatrixReadOnly {
         return this
     }
 
-    scaleSelf (scale, originX = 0, originY = 0) {}
-    scale3dSelf (scale, originX = 0, originY = 0, originZ = 0) {}
+    scaleSelf (scale, originX = 0, originY = 0) {
+        this.translateSelf(originX, originY)
+
+        this.multiplySelf(new DOMMatrix([
+            // 2D:
+            /*a*/scale, /*b*/0,
+            /*c*/0,     /*d*/scale,
+            /*e*/0,     /*f*/0,
+        ]))
+
+        this.translateSelf(-originX, -originY)
+        return this
+    }
+
+    scale3dSelf (scale, originX = 0, originY = 0, originZ = 0) {
+        this.translateSelf(originX, originY, originZ)
+
+        this.multiplySelf(new DOMMatrix([
+            // 3D
+            scale, 0,     0,     0,
+            0,     scale, 0,     0,
+            0,     0,     scale, 0,
+            0,     0,     0,     1,
+        ]))
+
+        this.translateSelf(-originX, -originY, -originZ)
+        return this
+    }
+
     scaleNonUniformSelf (scaleX, scaleY = 1, scaleZ = 1, originX = 0, originY = 0, originZ = 0) {}
     rotateSelf (angle, originX = 0, originY = 0) {}
     rotateFromVectorSelf (x, y) {}

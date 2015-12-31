@@ -35,8 +35,8 @@ class DOMMatrixReadOnly {
         // }}
 
         // TODO
-        if (!Match.test(numberSequence, [Number]))
-            throw new TypeError('DOMMatrixReadOnly constructor argument "numberSequence" must contain numbers.')
+        //if (!Match.test(numberSequence, [Number]))
+            //throw new TypeError('DOMMatrixReadOnly constructor argument "numberSequence" must contain numbers.')
 
         if (numberSequence.length === 6) {
             applyArrayValuesToDOMMatrix(numberSequence, this)
@@ -50,43 +50,19 @@ class DOMMatrixReadOnly {
         }
     }
 
-    get is2D() {
-        return this._is2D
-    }
-
-    /*
-     * TODO: make sure this matches the spec.
-     * TODO: Instead of calculating here, perhaps calculate and set
-     * this._isIdentity in other operations, and simply return the internal one
-     * here.
-     */
-    get isIdentity() {
-        let identity = [
-            /*m11*/1, /*m21*/0, /*m31*/0, /*m41*/0,
-            /*m12*/0, /*m22*/1, /*m32*/0, /*m42*/0,
-            /*m13*/0, /*m23*/0, /*m33*/1, /*m43*/0,
-            /*m14*/0, /*m24*/0, /*m34*/0, /*m44*/1,
-        ]
-
-        this._isIdentity = true
-
-        for (var i = 0, len = this._matrix.length; i < len; i+=1) {
-            if (this._matrix[i] != identity[i])
-                this._isIdentity = false
-        }
-
-        return this._isIdentity
-    }
-
     // Immutable transform methods -------------------------------------------
 
     translate (tx, ty, tz = 0) {
         return new DOMMatrix(this).translateSelf(tx, ty, tz)
-        // TODO: update to DOMMatrix.fromMatrix(this).
     }
 
-    scale (scale, originX = 0, originY = 0) {}
-    scale3d (scale, originX = 0, originY = 0, originZ = 0) {}
+    scale (scale, originX = 0, originY = 0) {
+        return new DOMMatrix(this).scaleSelf(scale, originX, originY)
+    }
+
+    scale3d (scale, originX = 0, originY = 0, originZ = 0) {
+        return new DOMMatrix(this).scale3dSelf(scale, originX, originY, originZ)
+    }
 
     scaleNonUniform (scaleX, scaleY = 1, scaleZ = 1, originX = 0, originY = 0, originZ = 0) {
         this.m11 *= scaleX
@@ -126,6 +102,33 @@ class DOMMatrixReadOnly {
 
     //stringifier() {} // What's this?
 
+    get is2D() {
+        return this._is2D
+    }
+
+    /*
+     * TODO: make sure this matches the spec.
+     * TODO: Instead of calculating here, perhaps calculate and set
+     * this._isIdentity in other operations, and simply return the internal one
+     * here.
+     */
+    get isIdentity() {
+        let identity = [
+            /*m11*/1, /*m21*/0, /*m31*/0, /*m41*/0,
+            /*m12*/0, /*m22*/1, /*m32*/0, /*m42*/0,
+            /*m13*/0, /*m23*/0, /*m33*/1, /*m43*/0,
+            /*m14*/0, /*m24*/0, /*m34*/0, /*m44*/1,
+        ]
+
+        this._isIdentity = true
+
+        for (var i = 0, len = this._matrix.length; i < len; i+=1) {
+            if (this._matrix[i] != identity[i])
+                this._isIdentity = false
+        }
+
+        return this._isIdentity
+    }
 
     get a() { return this.m11 }
     get b() { return this.m12 }
