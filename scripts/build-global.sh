@@ -5,6 +5,6 @@
 # Choose the name of the global symbol your project will define (for example,
 # the variable name that will be assigned onto `window` when this runs in a
 # browser).
-package_name='YOUR_PACKAGE_NAME_HERE'
+package_name='GeometryInterfaces'
 
 webpack --progress --colors --output-library-target umd src/index.js global.js --output-library $package_name
