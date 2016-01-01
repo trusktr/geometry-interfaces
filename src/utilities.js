@@ -98,6 +98,9 @@ function rotateAxisAngleArray(x, y, z, angle) {
     // rotation is about the Z axis (for example when calling rotateSelf)?
     // TODO: angle is supplied in degrees, but Math.* functions use
     // radians. Do we need to convert to radians?
+    // TODO: Performance can be improved by first detecting when x, y, or z of
+    // the axis are zero or 1, and using a pre-simplified version of the
+    // folowing math based on that condition.
     return [
         1-2*(y*y + z*z)*pow(sin(angle/2), 2),                       2*(x*y*pow(sin(angle/2), 2) + z*sin(angle/2)*cos(angle/2)), 2*(x*z*pow(sin(angle/2), 2) - y*sin(angle/2)*cos(angle/2)), 0,
         2*(x*y*pow(sin(angle/2), 2) - z*sin(angle/2)*cos(angle/2)), 1-2*(x*x + z*z)*pow(sin(angle/2), 2),                       2*(y*z*pow(sin(angle/2), 2) + x*sin(angle/2)*cos(angle/2)), 0,
