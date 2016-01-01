@@ -92,14 +92,16 @@ function matrixToArray(matrix) {
 
 export
 function rotateAxisAngleArray(x, y, z, angle) {
-    let {sin, cos} = Math
+    let {sin, cos, pow} = Math
 
+    // TODO: should we provide a 6-item array here to signify 2D when the
+    // rotation is about the Z axis (for example when calling rotateSelf)?
+    // TODO: angle is supplied in degrees, but Math.* functions use
+    // radians. Do we need to convert to radians?
     return [
-        // TODO: should we provide a 6-item array here to signify 2D?
-        // TODO: angle is supplied in degrees. Do we need to convert to radians?
-        1-2*(y*y + z*z)*sin(angle/2)**2,                       2*(x*y*sin(angle/2)**2 + z*sin(angle/2)*cos(angle/2)), 2*(x*z*sin(angle/2)**2 - y*sin(angle/2)*cos(angle/2)), 0,
-        2*(x*y*sin(angle/2)**2 - z*sin(angle/2)*cos(angle/2)), 1-2*(x*x + z*z)*sin(angle/2)**2,                       2*(y*z*sin(angle/2)**2 + x*sin(angle/2)*cos(angle/2)), 0,
-        2*(x*z*sin(angle/2)**2 + y*sin(angle/2)*cos(angle/2)), 2*(y*z*sin(angle/2)**2 - x*sin(angle/2)*cos(angle/2)), 1-2*(x*x + y*y)*sin(angle/2)**2,                       0,
+        1-2*(y*y + z*z)*pow(sin(angle/2), 2),                       2*(x*y*pow(sin(angle/2), 2) + z*sin(angle/2)*cos(angle/2)), 2*(x*z*pow(sin(angle/2), 2) - y*sin(angle/2)*cos(angle/2)), 0,
+        2*(x*y*pow(sin(angle/2), 2) - z*sin(angle/2)*cos(angle/2)), 1-2*(x*x + z*z)*pow(sin(angle/2), 2),                       2*(y*z*pow(sin(angle/2), 2) + x*sin(angle/2)*cos(angle/2)), 0,
+        2*(x*z*pow(sin(angle/2), 2) + y*sin(angle/2)*cos(angle/2)), 2*(y*z*pow(sin(angle/2), 2) - x*sin(angle/2)*cos(angle/2)), 1-2*(x*x + y*y)*pow(sin(angle/2), 2),                       0,
         0,                                                     0,                                                     0,                                                     1,
     ]
 }
