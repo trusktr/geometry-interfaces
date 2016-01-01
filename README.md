@@ -1,12 +1,9 @@
-GeometryUtils
-=============
+Geometry Interfaces
+===================
 
-The [GeometryUtils](http://www.w3.org/TR/cssom-view/#geometry)
+The W3C [Geometry](http://www.w3.org/TR/cssom-view/#geometry)
 [Interfaces](http://www.w3.org/TR/geometry-1/) implemented in JavaScript and
 polyfilled.
-
-Disclaimer: I'm implementing these interfaces/APIs on an as-needed basis, so
-this project may not include *all* of the interfaces or APIs.
 
 In the box so far
 -----------------
@@ -31,8 +28,9 @@ In the box so far
 Contributing
 ------------
 
-I'm building this hastily right now, to get DOMMatrix up and running. There's
-plenty of easy-pickings to improve performance of the matrix calculations...
+Disclaimer: I'm implementing these interfaces/APIs on an as-needed basis, so
+this project may not currently include *all* of the interfaces or APIs.
 
-Consider helping bring the web forward by making a pull request to add missing
-interfaces, APIs, or performance improvements. :]
+Consider bringing the web forward by making a pull request to add missing
+interfaces, APIs, or performance improvements (especially on the matrix
+calculations). :]

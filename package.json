@@ -1,0 +1,57 @@
+{
+  "name": "geometry-utils",
+  "version": "0.0.0",
+  "description": "The W3C Geometry Interfaces implemented in JavaScript and polyfilled.",
+  "format": "es6",
+  "main": "index.js",
+  "browser": "global.js",
+  "global": "global.js",
+  "license": "MIT",
+  "homepage": "https://github.com/trusktr/geometry-interfaces",
+  "scripts": {
+    "test": "./scripts/test.sh",
+    "clean": "./scripts/clean.sh",
+    "prepublish": "./scripts/prepublish.sh",
+    "build-umd": "./scripts/build-umd.sh",
+    "build-cjs": "./scripts/build-cjs.sh",
+    "build-amd": "./scripts/build-amd.sh",
+    "build-global": "./scripts/build-global.sh"
+  },
+  "dependencies": {
+    "babel-runtime": "^5.0.0"
+  },
+  "devDependencies": {
+    "babel": "^5.6.6",
+    "babel-loader": "^5.3.2",
+    "babelify": "^6.3.0",
+    "browserify": "^11.1.0",
+    "webpack": "^1.12.1"
+  },
+  "jspm": {
+    "registry": "jspm",
+    "directories": {
+      "lib": "src"
+    }
+  },
+  "bower": {
+    "TODO": "TODO"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trusktr/geometry-interfaces.git"
+  },
+  "bugs": {
+    "url": "https://github.com/trusktr/geometry-interfaces/issues"
+  },
+  "keywords": [
+    "DOMMatrix",
+    "DOMMatrixReadOnly",
+    "DOMPoint",
+    "DOMPointReadOnly",
+    "DOMRect",
+    "DOMRectReadOnly",
+    "GeometryUtils",
+    "geometry"
+  ],
+  "author": ""
+}

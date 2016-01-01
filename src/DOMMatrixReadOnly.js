@@ -103,7 +103,9 @@ class DOMMatrixReadOnly {
         throw new Error('inverse is not implemented yet.')
     }
 
-    //transformPoint(optional DOMPointInit point) // TODO
+    transformPoint(/*optional DOMPointInit*/ point) {
+        throw new Error('transformPoint is not implemented yet.')
+    }
 
     toFloat32Array() {
         throw new Error('toFloat32Array is not implemented yet.')
