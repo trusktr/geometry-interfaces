@@ -14,7 +14,7 @@ class DOMMatrix extends DOMMatrixReadOnly {
             super(numberSequence)
         }
         else if (arguments.length === 1) {
-            else if (typeof arguments[0] == 'string') {
+            if (typeof arguments[0] == 'string') {
                 let transformList = arguments[0]
                 // TODO validate that syntax of transformList matches transform-list (http://www.w3.org/TR/css-transforms-1/#typedef-transform-list).
                 // TODO ...
