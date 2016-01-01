@@ -4,6 +4,7 @@ echo saving important files.
 mkdir save
 mv \
     .git \
+    node_modules \
     src \
     scripts \
     webpack.config.js \
