@@ -1,5 +1,5 @@
-Geometry Interfaces
-===================
+dommetry
+========
 
 The W3C [Geometry](http://www.w3.org/TR/cssom-view/#geometry)
 [Interfaces](http://www.w3.org/TR/geometry-1/) implemented in JavaScript and
@@ -34,3 +34,9 @@ this project may not currently include *all* of the interfaces or APIs.
 Consider bringing the web forward by making a pull request to add missing
 interfaces, APIs, or performance improvements (especially on the matrix
 calculations). :]
+
+Miscellaneous
+-------------
+
+The word "dommetry" is a play on the words "geometry" and "DOMMatrix" put
+together.
