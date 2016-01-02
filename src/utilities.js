@@ -37,11 +37,9 @@ function multiplyToArray(A, B) {
 
 export
 function applyArrayValuesToDOMMatrix(array, matrix) {
-    console.log('Applying array values to DOMMatrix', array)
     let length = array.length
 
     if (length === 6) {
-        console.log('array length is 6')
         matrix.m11 = array[0]
         matrix.m12 = array[1]
         matrix.m21 = array[2]
@@ -50,7 +48,6 @@ function applyArrayValuesToDOMMatrix(array, matrix) {
         matrix.m42 = array[5]
     }
     else if (length === 16) {
-        console.log('array length is 16')
         matrix.m11 = array[0]
         matrix.m12 = array[1]
         matrix.m13 = array[2]
@@ -97,6 +94,8 @@ export
 function rotateAxisAngleArray(x, y, z, angle) {
     let {sin, cos, pow} = Math
 
+    let halfAngle = degreesToRadians(angle/2)
+
     // TODO: should we provide a 6-item array here to signify 2D when the
     // rotation is about the Z axis (for example when calling rotateSelf)?
     // TODO: angle is supplied in degrees, but Math.* functions use
@@ -105,9 +104,13 @@ function rotateAxisAngleArray(x, y, z, angle) {
     // the axis are zero or 1, and using a pre-simplified version of the
     // folowing math based on that condition.
     return [
-        1-2*(y*y + z*z)*pow(sin(angle/2), 2),                       2*(x*y*pow(sin(angle/2), 2) + z*sin(angle/2)*cos(angle/2)), 2*(x*z*pow(sin(angle/2), 2) - y*sin(angle/2)*cos(angle/2)), 0,
-        2*(x*y*pow(sin(angle/2), 2) - z*sin(angle/2)*cos(angle/2)), 1-2*(x*x + z*z)*pow(sin(angle/2), 2),                       2*(y*z*pow(sin(angle/2), 2) + x*sin(angle/2)*cos(angle/2)), 0,
-        2*(x*z*pow(sin(angle/2), 2) + y*sin(angle/2)*cos(angle/2)), 2*(y*z*pow(sin(angle/2), 2) - x*sin(angle/2)*cos(angle/2)), 1-2*(x*x + y*y)*pow(sin(angle/2), 2),                       0,
-        0,                                                     0,                                                     0,                                                     1,
+        1-2*(y*y + z*z)*pow(sin(halfAngle), 2),                           2*(x*y*pow(sin(halfAngle), 2) + z*sin(halfAngle)*cos(halfAngle)), 2*(x*z*pow(sin(halfAngle), 2) - y*sin(halfAngle)*cos(halfAngle)), 0,
+        2*(x*y*pow(sin(halfAngle), 2) - z*sin(halfAngle)*cos(halfAngle)), 1-2*(x*x + z*z)*pow(sin(halfAngle), 2),                           2*(y*z*pow(sin(halfAngle), 2) + x*sin(halfAngle)*cos(halfAngle)), 0,
+        2*(x*z*pow(sin(halfAngle), 2) + y*sin(halfAngle)*cos(halfAngle)), 2*(y*z*pow(sin(halfAngle), 2) - x*sin(halfAngle)*cos(halfAngle)), 1-2*(x*x + y*y)*pow(sin(halfAngle), 2),                           0,
+        0,                                                                0,                                                                0,                                                                1,
     ]
+}
+
+function degreesToRadians(degrees) {
+    return Math.PI/180 * degrees
 }

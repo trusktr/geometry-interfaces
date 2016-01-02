@@ -14,7 +14,6 @@ class DOMMatrixReadOnly {
      * throw an error.
      */
     constructor(numberSequence) {
-        console.log('DOMMatrixReadOnly constructor', arguments)
         if (! this instanceof DOMMatrix)
             throw new TypeError(`Expected 'this' to be an instance of DOMMatrix. DOMMatrixReadOnly can't be instantiated directly.`)
 
@@ -71,10 +70,7 @@ class DOMMatrixReadOnly {
     }
 
     rotate (angle, originX = 0, originY = 0) {
-        console.log('call rotate()', angle, originX, originY)
-        let m = new DOMMatrix(this).rotateSelf(angle, originX, originY)
-        console.log('?', m instanceof DOMMatrix)
-        return m
+        return new DOMMatrix(this).rotateSelf(angle, originX, originY)
     }
 
     // TODO
