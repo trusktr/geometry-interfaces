@@ -1,5 +1,5 @@
-dommetry
-========
+Geometry Interfaces
+===================
 
 The W3C [Geometry](http://www.w3.org/TR/cssom-view/#geometry)
 [Interfaces](http://www.w3.org/TR/geometry-1/) implemented in JavaScript and

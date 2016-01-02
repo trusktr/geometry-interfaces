@@ -1,5 +1,5 @@
 {
-  "name": "dommetry",
+  "name": "geometry-interfaces",
   "version": "0.0.3",
   "description": "The W3C Geometry Interfaces implemented in JavaScript and polyfilled.",
   "format": "es6",
