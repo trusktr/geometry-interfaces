@@ -48,10 +48,8 @@ with a `<script>` tag, for example:
 
 (You can rename the file of course.)
 
-If for some reason you want to, and if you're using a module system, you can
-import the classes directly (skipping the polyfilling of the classes onto the
-global scope, which happens when you import the whole package instead of a
-specific class).
+If you don't want to polyfill everything and you're using a module system,
+import whatever you need directly.
 
 ```js
 import DOMMatrix from 'geometry-interfaces/DOMMatrix'
