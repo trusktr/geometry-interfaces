@@ -182,6 +182,33 @@ class DOMMatrix extends DOMMatrixReadOnly {
         throw new Error('setMatrixValue is not implemented yet.')
     }
 
+    get a() { return this.m11 }
+    get b() { return this.m12 }
+    get c() { return this.m21 }
+    get d() { return this.m22 }
+    get e() { return this.m41 }
+    get f() { return this.m42 }
+
+    get m11() { return this._matrix[0]  }
+    get m12() { return this._matrix[4]  }
+    get m13() { return this._matrix[8]  }
+    get m14() { return this._matrix[12] }
+
+    get m21() { return this._matrix[1]  }
+    get m22() { return this._matrix[5]  }
+    get m23() { return this._matrix[9]  }
+    get m24() { return this._matrix[13] }
+
+    get m31() { return this._matrix[2]  }
+    get m32() { return this._matrix[6]  }
+    get m33() { return this._matrix[10] }
+    get m34() { return this._matrix[14] }
+
+    get m41() { return this._matrix[3]  }
+    get m42() { return this._matrix[7]  }
+    get m43() { return this._matrix[11] }
+    get m44() { return this._matrix[15] }
+
     set a(value) { this.m11 = value }
     set b(value) { this.m12 = value }
     set c(value) { this.m21 = value }
