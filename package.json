@@ -1,5 +1,5 @@
 {
-  "name": "geometry-utils",
+  "name": "geometry",
   "version": "0.0.0",
   "description": "The W3C Geometry Interfaces implemented in JavaScript and polyfilled.",
   "format": "es6",

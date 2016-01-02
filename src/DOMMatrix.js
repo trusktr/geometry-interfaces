@@ -9,6 +9,7 @@ import {
 export default
 class DOMMatrix extends DOMMatrixReadOnly {
     constructor() {
+        console.log('DOMMatrix constructor', arguments)
         if (arguments.length === 0) {
             let numberSequence = [1, 0, 0, 1, 0, 0]
             super(numberSequence)

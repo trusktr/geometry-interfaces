@@ -37,9 +37,11 @@ function multiplyToArray(A, B) {
 
 export
 function applyArrayValuesToDOMMatrix(array, matrix) {
+    console.log('Applying array values to DOMMatrix', array)
     let length = array.length
 
     if (length === 6) {
+        console.log('array length is 6')
         matrix.m11 = array[0]
         matrix.m12 = array[1]
         matrix.m21 = array[2]
@@ -48,6 +50,7 @@ function applyArrayValuesToDOMMatrix(array, matrix) {
         matrix.m42 = array[5]
     }
     else if (length === 16) {
+        console.log('array length is 16')
         matrix.m11 = array[0]
         matrix.m12 = array[1]
         matrix.m13 = array[2]
