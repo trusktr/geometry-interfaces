@@ -1,6 +1,6 @@
 {
   "name": "geometry-interfaces",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "The W3C Geometry Interfaces implemented in JavaScript and polyfilled.",
   "format": "es6",
   "main": "index.js",
