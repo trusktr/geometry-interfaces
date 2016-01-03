@@ -7,7 +7,7 @@
   "browser": "global.js",
   "global": "global.js",
   "license": "MIT",
-  "homepage": "https://github.com/trusktr/dommetry",
+  "homepage": "https://github.com/trusktr/geometry-interfaces",
   "scripts": {
     "test": "./scripts/test.sh",
     "clean": "./scripts/clean.sh",
@@ -38,10 +38,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/trusktr/dommetry.git"
+    "url": "https://github.com/trusktr/geometry-interfaces.git"
   },
   "bugs": {
-    "url": "https://github.com/trusktr/dommetry/issues"
+    "url": "https://github.com/trusktr/geometry-interfaces/issues"
   },
   "keywords": [
     "DOMMatrix",
