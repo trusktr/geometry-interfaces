@@ -14,11 +14,8 @@ class DOMMatrixReadOnly {
      * throw an error.
      */
     constructor(numberSequence) {
-        if (! this instanceof DOMMatrix)
-            throw new TypeError(`Expected 'this' to be an instance of DOMMatrix. DOMMatrixReadOnly can't be instantiated directly.`)
-
-        if (typeof numberSequence == 'undefined')
-            throw new TypeError('A numberSequence argument to the DOMMatrixReadOnly constructor is required.')
+        if (!(this instanceof DOMMatrix))
+            throw new TypeError(`DOMMatrixReadOnly can't be instantiated directly. Use DOMMatrix instead.`)
 
         // TODO, make these private: {{
 
