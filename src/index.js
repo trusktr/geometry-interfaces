@@ -5,7 +5,6 @@ let _global = null
 
 // browser
 if (typeof window != 'undefined') {
-    console.log('detected window')
     _global = window
 }
 else if (typeof global != 'undefined') {
