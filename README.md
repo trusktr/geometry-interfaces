@@ -5,6 +5,8 @@ The W3C [Geometry](http://www.w3.org/TR/cssom-view/#geometry)
 [Interfaces](http://www.w3.org/TR/geometry-1/) implemented in JavaScript and
 polyfilled.
 
+[![geometry-interfaces on NPM](https://nodei.co/npm/geometry-interfaces.png)](https://www.npmjs.com/package/geometry-interfaces)
+
 In the box so far
 -----------------
 
@@ -28,14 +30,14 @@ In the box so far
 Usage
 -----
 
-If you're using module system, just import the library:
+If you're using module system, just import the library ([available on NPM](https://www.npmjs.com/package/geometry-interfaces)):
 
 ```js
-import 'geometry-interfaces'
+import 'geometry-interfaces' // ES2015 Modules
 // or
-require('geometry-interfaces')
+require('geometry-interfaces') // CommonJS
 // or
-define(['geometry-interfaces'], () => {})
+define(['geometry-interfaces'], () => {}) // AMD
 ```
 
 You can also clone this repo, run `npm install`, then you'll see a `global.js`
