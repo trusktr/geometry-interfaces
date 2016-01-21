@@ -161,7 +161,8 @@ class DOMMatrix extends DOMMatrixReadOnly {
     }
 
     rotateAxisAngleSelf (x, y, z, angle) {
-        this.multiplySelf(new DOMMatrix(rotateAxisAngleArray(x,y,z,angle)))
+        let rotationMatrix = new DOMMatrix(rotateAxisAngleArray(x,y,z,angle))
+        this.multiplySelf(rotationMatrix)
         return this
     }
 

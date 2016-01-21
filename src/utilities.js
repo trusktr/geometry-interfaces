@@ -28,8 +28,8 @@ function multiplyToArray(A, B) {
     let resultArray = [
         m11, m12, m13, m14,
         m21, m22, m23, m24,
-        m31, m31, m31, m31,
-        m41, m41, m41, m41,
+        m31, m32, m33, m34,
+        m41, m42, m43, m44,
     ]
 
     return resultArray
@@ -98,8 +98,6 @@ function rotateAxisAngleArray(x, y, z, angle) {
 
     // TODO: should we provide a 6-item array here to signify 2D when the
     // rotation is about the Z axis (for example when calling rotateSelf)?
-    // TODO: angle is supplied in degrees, but Math.* functions use
-    // radians. Do we need to convert to radians?
     // TODO: Performance can be improved by first detecting when x, y, or z of
     // the axis are zero or 1, and using a pre-simplified version of the
     // folowing math based on that condition.
