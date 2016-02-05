@@ -4,28 +4,28 @@ function multiplyToArray(A, B) {
 
     //XXX: Are the following calculations faster hard coded (current), or as a loop?
 
-    let m11 = (A.m11 * B.m11) + (A.m21 * B.m12) + (A.m31 * B.m13) + (A.m41 * B.m14)
-    let m21 = (A.m11 * B.m21) + (A.m21 * B.m22) + (A.m31 * B.m23) + (A.m41 * B.m24)
-    let m31 = (A.m11 * B.m31) + (A.m21 * B.m32) + (A.m31 * B.m33) + (A.m41 * B.m34)
-    let m41 = (A.m11 * B.m41) + (A.m21 * B.m42) + (A.m31 * B.m43) + (A.m41 * B.m44)
+    const m11 = (A.m11 * B.m11) + (A.m21 * B.m12) + (A.m31 * B.m13) + (A.m41 * B.m14)
+    const m21 = (A.m11 * B.m21) + (A.m21 * B.m22) + (A.m31 * B.m23) + (A.m41 * B.m24)
+    const m31 = (A.m11 * B.m31) + (A.m21 * B.m32) + (A.m31 * B.m33) + (A.m41 * B.m34)
+    const m41 = (A.m11 * B.m41) + (A.m21 * B.m42) + (A.m31 * B.m43) + (A.m41 * B.m44)
 
-    let m12 = (A.m12 * B.m11) + (A.m22 * B.m12) + (A.m32 * B.m13) + (A.m42 * B.m14)
-    let m22 = (A.m12 * B.m21) + (A.m22 * B.m22) + (A.m32 * B.m23) + (A.m42 * B.m24)
-    let m32 = (A.m12 * B.m31) + (A.m22 * B.m32) + (A.m32 * B.m33) + (A.m42 * B.m34)
-    let m42 = (A.m12 * B.m41) + (A.m22 * B.m42) + (A.m32 * B.m43) + (A.m42 * B.m44)
+    const m12 = (A.m12 * B.m11) + (A.m22 * B.m12) + (A.m32 * B.m13) + (A.m42 * B.m14)
+    const m22 = (A.m12 * B.m21) + (A.m22 * B.m22) + (A.m32 * B.m23) + (A.m42 * B.m24)
+    const m32 = (A.m12 * B.m31) + (A.m22 * B.m32) + (A.m32 * B.m33) + (A.m42 * B.m34)
+    const m42 = (A.m12 * B.m41) + (A.m22 * B.m42) + (A.m32 * B.m43) + (A.m42 * B.m44)
 
-    let m13 = (A.m13 * B.m11) + (A.m23 * B.m12) + (A.m33 * B.m13) + (A.m43 * B.m14)
-    let m23 = (A.m13 * B.m21) + (A.m23 * B.m22) + (A.m33 * B.m23) + (A.m43 * B.m24)
-    let m33 = (A.m13 * B.m31) + (A.m23 * B.m32) + (A.m33 * B.m33) + (A.m43 * B.m34)
-    let m43 = (A.m13 * B.m41) + (A.m23 * B.m42) + (A.m33 * B.m43) + (A.m43 * B.m44)
+    const m13 = (A.m13 * B.m11) + (A.m23 * B.m12) + (A.m33 * B.m13) + (A.m43 * B.m14)
+    const m23 = (A.m13 * B.m21) + (A.m23 * B.m22) + (A.m33 * B.m23) + (A.m43 * B.m24)
+    const m33 = (A.m13 * B.m31) + (A.m23 * B.m32) + (A.m33 * B.m33) + (A.m43 * B.m34)
+    const m43 = (A.m13 * B.m41) + (A.m23 * B.m42) + (A.m33 * B.m43) + (A.m43 * B.m44)
 
-    let m14 = (A.m14 * B.m11) + (A.m24 * B.m12) + (A.m34 * B.m13) + (A.m44 * B.m14)
-    let m24 = (A.m14 * B.m21) + (A.m24 * B.m22) + (A.m34 * B.m23) + (A.m44 * B.m24)
-    let m34 = (A.m14 * B.m31) + (A.m24 * B.m32) + (A.m34 * B.m33) + (A.m44 * B.m34)
-    let m44 = (A.m14 * B.m41) + (A.m24 * B.m42) + (A.m34 * B.m43) + (A.m44 * B.m44)
+    const m14 = (A.m14 * B.m11) + (A.m24 * B.m12) + (A.m34 * B.m13) + (A.m44 * B.m14)
+    const m24 = (A.m14 * B.m21) + (A.m24 * B.m22) + (A.m34 * B.m23) + (A.m44 * B.m24)
+    const m34 = (A.m14 * B.m31) + (A.m24 * B.m32) + (A.m34 * B.m33) + (A.m44 * B.m34)
+    const m44 = (A.m14 * B.m41) + (A.m24 * B.m42) + (A.m34 * B.m43) + (A.m44 * B.m44)
 
     // in column-major order:
-    let resultArray = [
+    const resultArray = [
         m11, m12, m13, m14,
         m21, m22, m23, m24,
         m31, m32, m33, m34,
@@ -37,7 +37,7 @@ function multiplyToArray(A, B) {
 
 export
 function applyArrayValuesToDOMMatrix(array, matrix) {
-    let length = array.length
+    const length = array.length
 
     if (length === 6) {
         matrix.m11 = array[0]
@@ -92,15 +92,17 @@ function matrixToArray(matrix) {
 
 export
 function rotateAxisAngleArray(x, y, z, angle) {
-    let {sin, cos, pow} = Math
+    const {sin, cos, pow} = Math
 
-    let halfAngle = degreesToRadians(angle/2)
+    const halfAngle = degreesToRadians(angle/2)
 
     // TODO: should we provide a 6-item array here to signify 2D when the
     // rotation is about the Z axis (for example when calling rotateSelf)?
     // TODO: Performance can be improved by first detecting when x, y, or z of
     // the axis are zero or 1, and using a pre-simplified version of the
     // folowing math based on that condition.
+    // TODO: Performance can be improved by using different equations (use trig
+    // identities to find alternate formulas).
     return [
         1-2*(y*y + z*z)*pow(sin(halfAngle), 2),                           2*(x*y*pow(sin(halfAngle), 2) + z*sin(halfAngle)*cos(halfAngle)), 2*(x*z*pow(sin(halfAngle), 2) - y*sin(halfAngle)*cos(halfAngle)), 0,
         2*(x*y*pow(sin(halfAngle), 2) - z*sin(halfAngle)*cos(halfAngle)), 1-2*(x*x + z*z)*pow(sin(halfAngle), 2),                           2*(y*z*pow(sin(halfAngle), 2) + x*sin(halfAngle)*cos(halfAngle)), 0,

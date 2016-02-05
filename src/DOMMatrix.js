@@ -10,21 +10,21 @@ export default
 class DOMMatrix extends DOMMatrixReadOnly {
     constructor() {
         if (arguments.length === 0) {
-            let numberSequence = [1, 0, 0, 1, 0, 0]
+            const numberSequence = [1, 0, 0, 1, 0, 0]
             super(numberSequence)
         }
         else if (arguments.length === 1) {
             if (typeof arguments[0] == 'string') {
-                let transformList = arguments[0]
+                const transformList = arguments[0]
                 // TODO validate that syntax of transformList matches transform-list (http://www.w3.org/TR/css-transforms-1/#typedef-transform-list).
                 // TODO ...
             }
             else if (arguments[0] instanceof DOMMatrixReadOnly) {
-                let other = arguments[0]
+                const other = arguments[0]
                 super(matrixToArray(other))
             }
             else if (arguments[0] instanceof Float32Array || arguments[0] instanceof Float64Array) {
-                let typedArray = arguments[0]
+                const typedArray = arguments[0]
                 if (typedArray.length === 6 || typedArray.length === 16) {
                     super(Array.from(typedArray))
                 }
@@ -33,7 +33,7 @@ class DOMMatrix extends DOMMatrixReadOnly {
                 }
             }
             else if (arguments[0] instanceof Array /* TODO && all items are numbers */) {
-                let numberSequence = arguments[0]
+                const numberSequence = arguments[0]
                 if (numberSequence.length === 6 || numberSequence.length === 16) {
                     super(numberSequence)
                 }
@@ -52,7 +52,7 @@ class DOMMatrix extends DOMMatrixReadOnly {
         if (! other instanceof DOMMatrixReadOnly)
             throw new Error('The argument to multiplySelf must be an instance of DOMMatrixReadOnly or DOMMatrix')
 
-        let resultArray = multiplyToArray(this, other)
+        const resultArray = multiplyToArray(this, other)
         applyArrayValuesToDOMMatrix(resultArray, this)
 
         if (!other.is2D) this._is2D = false
@@ -64,7 +64,7 @@ class DOMMatrix extends DOMMatrixReadOnly {
         if (! other instanceof DOMMatrixReadOnly)
             throw new Error('The argument to multiplySelf must be an instance of DOMMatrixReadOnly or DOMMatrix')
 
-        let resultArray = multiplyToArray(other, this)
+        const resultArray = multiplyToArray(other, this)
         applyArrayValuesToDOMMatrix(resultArray, this)
 
         if (!other.is2D) this._is2D = false
@@ -79,7 +79,7 @@ class DOMMatrix extends DOMMatrixReadOnly {
             throw new Error('The first two arguments (X and Y translation values) are required (the third, Z translation, is optional).')
 
         // http://www.w3.org/TR/2012/WD-css3-transforms-20120911/#Translate3dDefined
-        let translationMatrix = new DOMMatrix([
+        const translationMatrix = new DOMMatrix([
             // column-major:
             1, 0, 0, 0,
             0, 1, 0, 0,
@@ -147,7 +147,7 @@ class DOMMatrix extends DOMMatrixReadOnly {
         this.translateSelf(originX, originY)
 
         // axis of rotation
-        let [x,y,z] = [0,0,1] // We're rotating around the Z axis.
+        const [x,y,z] = [0,0,1] // We're rotating around the Z axis.
 
         this.rotateAxisAngleSelf(x, y, z, angle)
 
@@ -161,7 +161,7 @@ class DOMMatrix extends DOMMatrixReadOnly {
     }
 
     rotateAxisAngleSelf (x, y, z, angle) {
-        let rotationMatrix = new DOMMatrix(rotateAxisAngleArray(x,y,z,angle))
+        const rotationMatrix = new DOMMatrix(rotateAxisAngleArray(x,y,z,angle))
         this.multiplySelf(rotationMatrix)
         return this
     }
