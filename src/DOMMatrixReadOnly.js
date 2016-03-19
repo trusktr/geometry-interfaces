@@ -134,14 +134,12 @@ class DOMMatrixReadOnly {
             /*m14*/0, /*m24*/0, /*m34*/0, /*m44*/1,
         ]
 
-        this._isIdentity = true
-
         for (var i = 0, len = this._matrix.length; i < len; i+=1) {
             if (this._matrix[i] != identity[i])
-                this._isIdentity = false
+                return (this._isIdentity = false)
         }
 
-        return this._isIdentity
+        return (this._isIdentity = true)
     }
 
     get a() { return this.m11 }
