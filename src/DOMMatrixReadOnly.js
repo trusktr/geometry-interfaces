@@ -1,6 +1,16 @@
 import DOMMatrix from './DOMMatrix'
 import {multiplyToArray, applyArrayValuesToDOMMatrix} from './utilities'
 
+// This matrix is represented internally in row-major format so that it is easy
+// to look at visually. In a pair of coordinates (as in "m23") the first number
+// is the column and the second is the row (so "m23" means column 2 row 3).
+const identity = [
+    /*m11*/1, /*m21*/0, /*m31*/0, /*m41*/0,
+    /*m12*/0, /*m22*/1, /*m32*/0, /*m42*/0,
+    /*m13*/0, /*m23*/0, /*m33*/1, /*m43*/0,
+    /*m14*/0, /*m24*/0, /*m34*/0, /*m44*/1,
+]
+
 export default
 class DOMMatrixReadOnly {
 
@@ -13,42 +23,20 @@ class DOMMatrixReadOnly {
      * matrix (m11 to m44) and this.is2D is set false. Arrays of other lengths
      * throw an error.
      */
-    constructor(numberSequence) {
+    constructor(numberSequence = []) {
         if (!(this instanceof DOMMatrix))
             throw new TypeError(`DOMMatrixReadOnly can't be instantiated directly. Use DOMMatrix instead.`)
 
-        // TODO, make these private: {{
+        const {length} = numberSequence
 
-        // `this._matrix` defaults to the identity matrix.
-        // `this._matrix` is represented internally in row-major format so that
-        // it is easy to look at visually. In a pair of coordinates (as in
-        // "m23") the first number is the column and the second is the row (so
-        // "m23" means column 2 row 3).
-        this._matrix = new Float64Array([
-            /*m11*/1, /*m21*/0, /*m31*/0, /*m41*/0,
-            /*m12*/0, /*m22*/1, /*m32*/0, /*m42*/0,
-            /*m13*/0, /*m23*/0, /*m33*/1, /*m43*/0,
-            /*m14*/0, /*m24*/0, /*m34*/0, /*m44*/1,
-        ])
-        this._is2D = true
+        if (length === undefined || length !== 6 || length !== 16)
+            throw new TypeError('DOMMatrix constructor argument "numberSequence" must be an array-like with 6 or 16 numbers.')
+
+        this._matrix = new Float64Array(identity)
         this._isIdentity = true
+        this._is2D = length === 6 ? true : false
 
-        // }}
-
-        // TODO
-        //if (!Match.test(numberSequence, [Number]))
-            //throw new TypeError('DOMMatrixReadOnly constructor argument "numberSequence" must contain numbers.')
-
-        if (numberSequence.length === 6) {
-            applyArrayValuesToDOMMatrix(numberSequence, this)
-        }
-        else if (numberSequence.length === 16) {
-            applyArrayValuesToDOMMatrix(numberSequence, this)
-            this._is2D = false
-        }
-        else {
-            throw new TypeError('DOMMatrixReadOnly constructor argument "numberSequence" must have length 6 or 16.')
-        }
+        applyArrayValuesToDOMMatrix(numberSequence, this)
     }
 
     // Immutable transform methods -------------------------------------------
@@ -127,13 +115,6 @@ class DOMMatrixReadOnly {
      * here.
      */
     get isIdentity() {
-        const identity = [
-            /*m11*/1, /*m21*/0, /*m31*/0, /*m41*/0,
-            /*m12*/0, /*m22*/1, /*m32*/0, /*m42*/0,
-            /*m13*/0, /*m23*/0, /*m33*/1, /*m43*/0,
-            /*m14*/0, /*m24*/0, /*m34*/0, /*m44*/1,
-        ]
-
         for (var i = 0, len = this._matrix.length; i < len; i+=1) {
             if (this._matrix[i] != identity[i])
                 return (this._isIdentity = false)

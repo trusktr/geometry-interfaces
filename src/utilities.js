@@ -1,38 +1,39 @@
 
+// A reusable array, to avoid allocating new arrays during multiplication.
+// in column-major order:
+const scratch = [
+    /*m11*/0, /*m12*/0, /*m13*/0, /*m14*/0,
+    /*m21*/0, /*m22*/0, /*m23*/0, /*m24*/0,
+    /*m31*/0, /*m32*/0, /*m33*/0, /*m34*/0,
+    /*m41*/0, /*m42*/0, /*m43*/0, /*m44*/0,
+]
+
 export
-function multiplyToArray(A, B) {
+function multiplyAndApply(A, B, target) {
 
     //XXX: Are the following calculations faster hard coded (current), or as a loop?
 
-    const m11 = (A.m11 * B.m11) + (A.m21 * B.m12) + (A.m31 * B.m13) + (A.m41 * B.m14)
-    const m21 = (A.m11 * B.m21) + (A.m21 * B.m22) + (A.m31 * B.m23) + (A.m41 * B.m24)
-    const m31 = (A.m11 * B.m31) + (A.m21 * B.m32) + (A.m31 * B.m33) + (A.m41 * B.m34)
-    const m41 = (A.m11 * B.m41) + (A.m21 * B.m42) + (A.m31 * B.m43) + (A.m41 * B.m44)
+    scratch[0]  = (A.m11 * B.m11) + (A.m21 * B.m12) + (A.m31 * B.m13) + (A.m41 * B.m14)
+    scratch[4]  = (A.m11 * B.m21) + (A.m21 * B.m22) + (A.m31 * B.m23) + (A.m41 * B.m24)
+    scratch[8]  = (A.m11 * B.m31) + (A.m21 * B.m32) + (A.m31 * B.m33) + (A.m41 * B.m34)
+    scratch[12] = (A.m11 * B.m41) + (A.m21 * B.m42) + (A.m31 * B.m43) + (A.m41 * B.m44)
 
-    const m12 = (A.m12 * B.m11) + (A.m22 * B.m12) + (A.m32 * B.m13) + (A.m42 * B.m14)
-    const m22 = (A.m12 * B.m21) + (A.m22 * B.m22) + (A.m32 * B.m23) + (A.m42 * B.m24)
-    const m32 = (A.m12 * B.m31) + (A.m22 * B.m32) + (A.m32 * B.m33) + (A.m42 * B.m34)
-    const m42 = (A.m12 * B.m41) + (A.m22 * B.m42) + (A.m32 * B.m43) + (A.m42 * B.m44)
+    scratch[1]  = (A.m12 * B.m11) + (A.m22 * B.m12) + (A.m32 * B.m13) + (A.m42 * B.m14)
+    scratch[5]  = (A.m12 * B.m21) + (A.m22 * B.m22) + (A.m32 * B.m23) + (A.m42 * B.m24)
+    scratch[9]  = (A.m12 * B.m31) + (A.m22 * B.m32) + (A.m32 * B.m33) + (A.m42 * B.m34)
+    scratch[13] = (A.m12 * B.m41) + (A.m22 * B.m42) + (A.m32 * B.m43) + (A.m42 * B.m44)
 
-    const m13 = (A.m13 * B.m11) + (A.m23 * B.m12) + (A.m33 * B.m13) + (A.m43 * B.m14)
-    const m23 = (A.m13 * B.m21) + (A.m23 * B.m22) + (A.m33 * B.m23) + (A.m43 * B.m24)
-    const m33 = (A.m13 * B.m31) + (A.m23 * B.m32) + (A.m33 * B.m33) + (A.m43 * B.m34)
-    const m43 = (A.m13 * B.m41) + (A.m23 * B.m42) + (A.m33 * B.m43) + (A.m43 * B.m44)
+    scratch[2]  = (A.m13 * B.m11) + (A.m23 * B.m12) + (A.m33 * B.m13) + (A.m43 * B.m14)
+    scratch[6]  = (A.m13 * B.m21) + (A.m23 * B.m22) + (A.m33 * B.m23) + (A.m43 * B.m24)
+    scratch[10] = (A.m13 * B.m31) + (A.m23 * B.m32) + (A.m33 * B.m33) + (A.m43 * B.m34)
+    scratch[14] = (A.m13 * B.m41) + (A.m23 * B.m42) + (A.m33 * B.m43) + (A.m43 * B.m44)
 
-    const m14 = (A.m14 * B.m11) + (A.m24 * B.m12) + (A.m34 * B.m13) + (A.m44 * B.m14)
-    const m24 = (A.m14 * B.m21) + (A.m24 * B.m22) + (A.m34 * B.m23) + (A.m44 * B.m24)
-    const m34 = (A.m14 * B.m31) + (A.m24 * B.m32) + (A.m34 * B.m33) + (A.m44 * B.m34)
-    const m44 = (A.m14 * B.m41) + (A.m24 * B.m42) + (A.m34 * B.m43) + (A.m44 * B.m44)
+    scratch[3]  = (A.m14 * B.m11) + (A.m24 * B.m12) + (A.m34 * B.m13) + (A.m44 * B.m14)
+    scratch[7]  = (A.m14 * B.m21) + (A.m24 * B.m22) + (A.m34 * B.m23) + (A.m44 * B.m24)
+    scratch[11] = (A.m14 * B.m31) + (A.m24 * B.m32) + (A.m34 * B.m33) + (A.m44 * B.m34)
+    scratch[15] = (A.m14 * B.m41) + (A.m24 * B.m42) + (A.m34 * B.m43) + (A.m44 * B.m44)
 
-    // in column-major order:
-    const resultArray = [
-        m11, m12, m13, m14,
-        m21, m22, m23, m24,
-        m31, m32, m33, m34,
-        m41, m42, m43, m44,
-    ]
-
-    return resultArray
+    applyArrayValuesToDOMMatrix(scratch, target)
 }
 
 export
@@ -65,29 +66,6 @@ function applyArrayValuesToDOMMatrix(array, matrix) {
         matrix.m43 = array[14]
         matrix.m44 = array[15]
     }
-}
-
-export
-function matrixToArray(matrix) {
-    let result = null
-
-    if (matrix.is2D) {
-        result = [
-            matrix.m11, matrix.m12,
-            matrix.m21, matrix.m22,
-            matrix.m41, matrix.m42,
-        ]
-    }
-    else {
-        result = [
-            matrix.m11, matrix.m12, matrix.m13, matrix.m14,
-            matrix.m21, matrix.m22, matrix.m23, matrix.m24,
-            matrix.m31, matrix.m32, matrix.m33, matrix.m34,
-            matrix.m41, matrix.m42, matrix.m43, matrix.m44,
-        ]
-    }
-
-    return result
 }
 
 export

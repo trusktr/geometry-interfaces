@@ -1,45 +1,26 @@
 import DOMMatrixReadOnly from './DOMMatrixReadOnly'
 import {
-    multiplyToArray,
-    applyArrayValuesToDOMMatrix,
-    matrixToArray,
+    multiplyAndApply,
     rotateAxisAngleArray,
 } from './utilities'
 
 export default
 class DOMMatrix extends DOMMatrixReadOnly {
-    constructor() {
-        if (arguments.length === 0) {
-            const numberSequence = [1, 0, 0, 1, 0, 0]
-            super(numberSequence)
+    constructor(arg) {
+        const numArgs = arguments.length
+        if (numArgs === 0) {
+            super([1, 0, 0, 1, 0, 0])
         }
-        else if (arguments.length === 1) {
-            if (typeof arguments[0] == 'string') {
-                const transformList = arguments[0]
+        else if (numArgs === 1) {
+            if (typeof arg == 'string') {
+                throw new Error('CSS transformList arg not yet implemented.')
                 // TODO validate that syntax of transformList matches transform-list (http://www.w3.org/TR/css-transforms-1/#typedef-transform-list).
-                // TODO ...
             }
-            else if (arguments[0] instanceof DOMMatrixReadOnly) {
-                const other = arguments[0]
-                super(matrixToArray(other))
+            else if (arg instanceof DOMMatrix) {
+                super(arg._matrix)
             }
-            else if (arguments[0] instanceof Float32Array || arguments[0] instanceof Float64Array) {
-                const typedArray = arguments[0]
-                if (typedArray.length === 6 || typedArray.length === 16) {
-                    super(Array.from(typedArray))
-                }
-                else {
-                    throw new TypeError('The typed array argument to the DOMMatrix constructor has an invalid length.')
-                }
-            }
-            else if (arguments[0] instanceof Array /* TODO && all items are numbers */) {
-                const numberSequence = arguments[0]
-                if (numberSequence.length === 6 || numberSequence.length === 16) {
-                    super(numberSequence)
-                }
-                else {
-                    throw new TypeError('The array argument to the DOMMatrix constructor has an invalid length.')
-                }
+            else if (arg instanceof Float32Array || arg instanceof Float64Array || arg instanceof Array) {
+                super(arg)
             }
         }
         else {
@@ -49,11 +30,11 @@ class DOMMatrix extends DOMMatrixReadOnly {
 
     // Mutable transform methods
     multiplySelf (other) {
-        if (! other instanceof DOMMatrixReadOnly)
-            throw new Error('The argument to multiplySelf must be an instance of DOMMatrixReadOnly or DOMMatrix')
+        if (!(other instanceof DOMMatrix))
+            throw new Error('The argument to multiplySelf must be an instance of DOMMatrix')
 
-        const resultArray = multiplyToArray(this, other)
-        applyArrayValuesToDOMMatrix(resultArray, this)
+        // TODO: avoid creating a new array, just apply values directly.
+        multiplyAndApply(this, other, this)
 
         if (!other.is2D) this._is2D = false
 
@@ -61,11 +42,11 @@ class DOMMatrix extends DOMMatrixReadOnly {
     }
 
     preMultiplySelf (other) {
-        if (! other instanceof DOMMatrixReadOnly)
-            throw new Error('The argument to multiplySelf must be an instance of DOMMatrixReadOnly or DOMMatrix')
+        if (!(other instanceof DOMMatrix))
+            throw new Error('The argument to multiplySelf must be an instance of DOMMatrix')
 
-        const resultArray = multiplyToArray(other, this)
-        applyArrayValuesToDOMMatrix(resultArray, this)
+        // TODO: avoid creating a new array, just apply values directly.
+        multiplyAndApply(other, this, this)
 
         if (!other.is2D) this._is2D = false
 
