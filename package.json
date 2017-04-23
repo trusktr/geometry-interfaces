@@ -11,11 +11,14 @@
   "scripts": {
     "test": "./scripts/test.sh",
     "clean": "./scripts/clean.sh",
-    "prepublish": "./scripts/prepublish.sh",
     "build-umd": "./scripts/build-umd.sh",
     "build-cjs": "./scripts/build-cjs.sh",
     "build-amd": "./scripts/build-amd.sh",
-    "build-global": "./scripts/build-global.sh"
+    "build-global": "./scripts/build-global.sh",
+    "prepublish": "npm run build-cjs",
+    "preversion": "git reset HEAD global.js && git checkout -- global.js && git add . && git stash && git clean -xfd -e node_modules",
+    "version": "npm run build-global && git add -f global.js",
+    "postversion": "npm publish && git push && git push --tags && git stash pop && git reset HEAD"
   },
   "dependencies": {
     "babel-runtime": "^5.0.0"
