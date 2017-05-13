@@ -29,7 +29,7 @@ class DOMMatrixReadOnly {
 
         const {length} = numberSequence
 
-        if (length === undefined || length !== 6 || length !== 16)
+        if (length === undefined || !(length === 6 || length === 16))
             throw new TypeError('DOMMatrix constructor argument "numberSequence" must be an array-like with 6 or 16 numbers.')
 
         this._matrix = new Float64Array(identity)
