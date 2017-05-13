@@ -15,9 +15,8 @@
     "build-cjs": "./scripts/build-cjs.sh",
     "build-amd": "./scripts/build-amd.sh",
     "build-global": "./scripts/build-global.sh",
-    "prepublish": "npm run build-cjs",
     "preversion": "git reset HEAD global.js && git checkout -- global.js && git add . && git stash && git clean -xfd -e node_modules",
-    "version": "npm run build-global && git add -f global.js",
+    "version": "npm run build-cjs && npm run build-global && git add -f global.js",
     "postversion": "npm publish && git push && git push --tags && git stash pop && git reset HEAD"
   },
   "dependencies": {
