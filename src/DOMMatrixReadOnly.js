@@ -96,10 +96,10 @@ class DOMMatrixReadOnly {
     }
 
     toFloat32Array() {
-        throw new Error('toFloat32Array is not implemented yet.')
+        return Float32Array.from(this._matrix)
     }
     toFloat64Array() {
-        throw new Error('toFloat64Array is not implemented yet.')
+        return Float64Array.from(this._matrix)
     }
 
     //stringifier() {} // What's this?
