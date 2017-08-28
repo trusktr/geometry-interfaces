@@ -11,23 +11,28 @@
   "scripts": {
     "test": "./scripts/test.sh",
     "clean": "./scripts/clean.sh",
+    "build": "./scripts/build.sh",
     "build-umd": "./scripts/build-umd.sh",
     "build-cjs": "./scripts/build-cjs.sh",
     "build-amd": "./scripts/build-amd.sh",
     "build-global": "./scripts/build-global.sh",
-    "preversion": "git reset HEAD global.js && git checkout -- global.js && git add . && git stash && git clean -xfd -e node_modules",
-    "version": "npm run build-cjs && npm run build-global && git add -f global.js",
-    "postversion": "npm publish && git push && git push --tags && git stash pop && git reset HEAD"
+    "watch": "./scripts/build-cjs.sh --watch & P1=$!; ./scripts/build-global.sh --watch & P2=$!; wait $P1 $P2",
+    "preversion": "echo '--- PREVERSION' && git reset HEAD global.js && git checkout -- global.js && git add . && git stash && git clean -xfd -e node_modules",
+    "version": "echo '--- VERSION' && npm run build && git add global.js",
+    "postversion": "echo '--- POSTVERSION' && npm publish && git push && git push --tags && git stash pop && git reset HEAD"
   },
-  "dependencies": {
-    "babel-runtime": "^5.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "babel": "^5.6.6",
-    "babel-loader": "^5.3.2",
-    "babelify": "^6.3.0",
-    "browserify": "^11.1.0",
-    "webpack": "^1.12.1"
+    "babel-cli": "^6.0.0",
+    "babel-core": "^6.0.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-amd": "^6.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.0.0",
+    "babel-plugin-transform-es2015-modules-umd": "^6.0.0",
+    "babili-webpack-plugin": "^0.1.2",
+    "buble": "^0.15.2",
+    "buble-loader": "^0.4.1",
+    "webpack": "^3.4.1"
   },
   "jspm": {
     "registry": "jspm",
@@ -53,7 +58,11 @@
     "DOMRect",
     "DOMRectReadOnly",
     "GeometryUtils",
-    "geometry"
+    "geometry",
+    "Geometry Interfaces",
+    "3D",
+    "affine transforms",
+    "transformation matrices"
   ],
   "author": ""
 }

@@ -8,6 +8,7 @@ mv \
     src \
     scripts \
     webpack.config.js \
+    global.js \
 save/
 
 # done modifying (unless you know what you're doing) -----------------------------
