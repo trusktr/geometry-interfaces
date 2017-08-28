@@ -2,12 +2,12 @@
 node_modules
 npm-debug.log
 
-!/global.js
-
 # ignore build files.
 tmp/
 /*.js
 /*.js.map
+!/global.js
+!/webpack.config.js
 
 # Ignore built output folders. Edit this list: list the the top-level folders
 # that you have in your `src` folder. Maintaining this is a tradeoff to the
