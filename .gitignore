@@ -9,10 +9,5 @@ tmp/
 !/global.js
 !/webpack.config.js
 
-# Ignore built output folders. Edit this list: list the the top-level folders
-# that you have in your `src` folder. Maintaining this is a tradeoff to the
-# flexibility we get from the way we're publish packages so that they work in
-# as many places as possible. If you don't edit this list, then your build
-# files will be listed when you run `git status`. Optionally, you might like to
-# just check those files into git. It's up to you.
+# ignore build folders
 /foo
