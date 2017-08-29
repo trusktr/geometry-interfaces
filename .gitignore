@@ -3,11 +3,10 @@ node_modules
 npm-debug.log
 
 # ignore build files.
-tmp/
 /*.js
 /*.js.map
 !/global.js
 !/webpack.config.js
 
 # ignore build folders
-/foo
+esmodule/

@@ -4,6 +4,7 @@
   "description": "The W3C Geometry Interfaces implemented in JavaScript and polyfilled.",
   "format": "es6",
   "main": "index.js",
+  "module": "esmodule",
   "browser": "global.js",
   "global": "global.js",
   "license": "MIT",

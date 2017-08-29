@@ -1,8 +1,10 @@
-import DOMMatrixReadOnly from './DOMMatrixReadOnly'
+import DOMMatrixReadOnly, {initDOMMatrixReadOnly} from './DOMMatrixReadOnly'
 import {
     multiplyAndApply,
     rotateAxisAngleArray,
 } from './utilities'
+
+initDOMMatrixReadOnly()
 
 export default
 class DOMMatrix extends DOMMatrixReadOnly {
@@ -217,4 +219,3 @@ class DOMMatrix extends DOMMatrixReadOnly {
     set m43(value) { this._matrix[11] = value }
     set m44(value) { this._matrix[15] = value }
 }
-
