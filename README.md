@@ -30,7 +30,7 @@ In the box so far
 Usage
 -----
 
-If you're using module system, just import the library ([available on NPM](https://www.npmjs.com/package/geometry-interfaces)):
+If you're using a module system, just import the library after installing it [from NPM](https://www.npmjs.com/package/geometry-interfaces):
 
 ```js
 import 'geometry-interfaces' // ES2015 Modules
@@ -40,9 +40,9 @@ require('geometry-interfaces') // CommonJS
 define(['geometry-interfaces'], () => {}) // AMD
 ```
 
-You can also clone this repo, run `npm install`, then you'll see a `global.js`
-file in the root of the project that you can copy over to your project and load
-with a `<script>` tag, for example:
+You can also clone this repo, then you'll see a `global.js` file in the root of
+the project that you can copy over to your project and load with a `<script>`
+tag, for example:
 
 ```html
 <script src='global.js'></script>
@@ -50,8 +50,12 @@ with a `<script>` tag, for example:
 
 (You can rename the file of course.)
 
-If you don't want to polyfill everything and you're using a module system,
-import whatever you need directly.
+The `global.js` file is usually the one shipped with the last tagged version.
+Execute `npm run build-global` to update the file using the latest content in
+the repo.
+
+If you don't want to polyfill everything and you're using a module system (f.e.
+Rollup, Webpack, Browserify, etc), import whatever you need directly:
 
 ```js
 import DOMMatrix from 'geometry-interfaces/DOMMatrix'
@@ -71,4 +75,4 @@ Miscellaneous
 -------------
 
 The word "dommetry" is a play on the words "geometry" and "DOMMatrix" put
-together.
+together. :D
