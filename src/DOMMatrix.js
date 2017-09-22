@@ -55,12 +55,9 @@ class DOMMatrix extends DOMMatrixReadOnly {
         return this
     }
 
-    translateSelf (tx, ty, tz = 0) {
+    translateSelf (tx = 0, ty = 0, tz = 0) {
         // TODO: check args are numbers
-
-        if (arguments.length === 1)
-            throw new Error('The first two arguments (X and Y translation values) are required (the third, Z translation, is optional).')
-
+        
         // http://www.w3.org/TR/2012/WD-css3-transforms-20120911/#Translate3dDefined
         const translationMatrix = new DOMMatrix([
             // column-major:
