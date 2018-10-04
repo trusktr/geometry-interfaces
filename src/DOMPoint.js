@@ -25,12 +25,21 @@ class DOMPointReadOnly {
         _(this).y = (y !== undefined) ? Number(y) : 0
         _(this).z = (z !== undefined) ? Number(z) : 0
         _(this).w = (w !== undefined) ? Number(w) : 1
+
+        if (this.constructor === DOMPointReadOnly) {
+            Object.freeze(_(this))
+        }
     }
 
     get x() { return _(this).x }
     get y() { return _(this).y }
     get z() { return _(this).z }
     get w() { return _(this).w }
+
+    set x(value) { _(this).x = Number(value) }
+    set y(value) { _(this).y = Number(value) }
+    set z(value) { _(this).z = Number(value) }
+    set w(value) { _(this).w = Number(value) }
 
     matrixTransform(matrix) {
         let result = new this.constructor(this)
@@ -49,11 +58,6 @@ class DOMPointReadOnly {
 }
 
 export
-class DOMPoint extends DOMPointReadOnly {
-    set x(value) { _(this).x = Number(value) }
-    set y(value) { _(this).y = Number(value) }
-    set z(value) { _(this).z = Number(value) }
-    set w(value) { _(this).w = Number(value) }
-}
+class DOMPoint extends DOMPointReadOnly {}
 
 export default DOMPoint
