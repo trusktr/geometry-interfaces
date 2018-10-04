@@ -52,6 +52,8 @@ class DOMPointReadOnly {
         return result
     }
 
+    toJSON() { return Object.assign({}, _(this)) }
+
     static fromPoint(other) {
         return new this(other.x, other.y, other.z, other.w)
     }
