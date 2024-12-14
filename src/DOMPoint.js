@@ -1,22 +1,4 @@
-let privatesMap
-const _ = o => {
-    if (!privatesMap) {
-        privatesMap = new WeakMap
-        let privates = {}
-        privatesMap.set(o, privates)
-        return privates
-    }
-    else {
-        let privates = privatesMap.get(o)
-
-        if (privates === undefined) {
-            privates = {}
-            privatesMap.set(o, privates)
-        }
-
-        return privates
-    }
-}
+import { _ } from './utilities'
 
 export
 class DOMPointReadOnly {

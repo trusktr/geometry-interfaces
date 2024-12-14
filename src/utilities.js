@@ -1,4 +1,21 @@
-
+let privatesMap
+export
+function _(o) {
+    if (!privatesMap) {
+        privatesMap = new WeakMap
+        let privates = {}
+        privatesMap.set(o, privates)
+        return privates
+    }
+    else {
+        let privates = privatesMap.get(o)
+        if (privates === undefined) {
+            privates = {}
+            privatesMap.set(o, privates)
+        }
+        return privates
+    }
+}
 // A reusable array, to avoid allocating new arrays during multiplication.
 // in column-major order:
 const scratch = [
