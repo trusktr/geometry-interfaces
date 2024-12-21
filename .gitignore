@@ -1,12 +1,4 @@
-.DS_Store
 node_modules
-npm-debug.log
-
-# ignore build files.
-/*.js
-/*.js.map
-!/global.js
-!/webpack.config.js
-
-# ignore build folders
-esmodule/
+.vscode/
+*.log
+dist/*.test.js
