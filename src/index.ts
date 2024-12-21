@@ -33,3 +33,5 @@ if (_global) {
 	_global.DOMRect = DOMRect
 	_global.DOMRectReadOnly = DOMRectReadOnly
 }
+
+export const version = '1.1.4'

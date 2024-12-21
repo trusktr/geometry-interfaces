@@ -1,71 +1,75 @@
 # Geometry Interfaces
 
+Let's do some dommetry!
+
 The W3C [Geometry](http://www.w3.org/TR/cssom-view/#geometry)
 [Interfaces](http://www.w3.org/TR/geometry-1/) implemented in JavaScript and
 polyfilled.
 
-[![geometry-interfaces on NPM](https://nodei.co/npm/geometry-interfaces.png)](https://www.npmjs.com/package/geometry-interfaces)
+<h4><code><strong>npm install geometry-interfaces</strong></code></h4>
 
 ## In the box so far
 
-### Interfaces
-
-#### Work in progress
-
-- [DOMMatrixReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly)
-- [DOMMatrix](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix)
-
-#### Up next
-
-- [DOMPointReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly)
-- [DOMPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint)
-
-#### Under consideration
-
+- [DOMMatrixReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly) \*
+- [DOMMatrix](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix) \*
+- [DOMPointReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly) \*
+- [DOMPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint) \*
+- [DOMQuad](https://developer.mozilla.org/en-US/docs/Web/API/DOMQuad) \*
 - [DOMRectReadOnly](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly)
 - [DOMRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect)
 
+\* Some methods are not implemented yet.
+
 ## Usage
 
-If you're using a module system, just import the library after installing it [from NPM](https://www.npmjs.com/package/geometry-interfaces):
+Just import the library after installing it [from
+NPM](https://www.npmjs.com/package/geometry-interfaces) and it will polyfill the
+global APIs:
 
 ```js
-import 'geometry-interfaces' // ES2015 Modules
-// or
-require('geometry-interfaces') // CommonJS
-// or
-define(['geometry-interfaces'], () => {}) // AMD
+import 'geometry-interfaces' // ES Modules
 ```
 
-You can also clone this repo, then you'll see a `global.js` file in the root of
-the project that you can copy over to your project and load with a `<script>`
-tag, for example:
+If you're not using a build tool, just plain JS in a browser, you can set up an
+[importmap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#importing_modules_using_import_maps):
 
 ```html
-<script src="global.js"></script>
+<script type="importmap">
+	{
+		"imports": {
+			"geometry-interfaces": "/node_modules/geometry-interfaces/dist/index.js"
+		}
+	}
+</script>
+
+<script type="module">
+	import 'geometry-interfaces'
+
+	// ... use APIs ...
+</script>
 ```
 
-(You can rename the file of course.)
-
-The `global.js` file is usually the one shipped with the last tagged version.
-Execute `npm run build-global` to update the file using the latest content in
-the repo.
-
-If you don't want to polyfill everything and you're using a module system (f.e.
-Rollup, Webpack, Browserify, etc), import whatever you need directly:
+If you don't want to polyfill the APIs globally, you can import what you need
+directly:
 
 ```js
-import DOMMatrix from 'geometry-interfaces/DOMMatrix'
+import {DOMMatrix} from 'geometry-interfaces/dist/DOMMatrix.js'
+import {DOMPoint} from 'geometry-interfaces/dist/DOMPoint.js'
 ```
+
+## TypeScript
+
+Make sure you have `lib: ["dom"]` in `tsconfig` or DOM types will be missing and
+there may be type errors.
 
 ## Contributing
 
-Disclaimer: I'm implementing these interfaces/APIs on an as-needed basis, so
-this project may not currently include _all_ of the interfaces or APIs.
+To develop the project, run `npm clean-install` after cloning the repo, then
+`npm run dev` will build the TS to JS in watch mode, and `npm run build` will
+build it without watch mode.
 
-Consider bringing the web forward by making a pull request to add missing
-interfaces, APIs, or performance improvements (especially on the matrix
-calculations). :]
+The are currently not tests. Please consider helping out by making a pull
+request to add missing interfaces, APIs, tests, or performance improvements. :]
 
 ## Miscellaneous
 
