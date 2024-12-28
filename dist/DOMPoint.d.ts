@@ -12,7 +12,7 @@ export declare class DOMPointReadOnly {
     get y(): number;
     get z(): number;
     get w(): number;
-    matrixTransform(_matrix: DOMMatrixReadOnly): DOMPoint;
+    matrixTransform(_matrix: DOMMatrixInit): DOMPoint;
     toJSON(): {
         x: number;
         y: number;

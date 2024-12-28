@@ -68,8 +68,9 @@ To develop the project, run `npm clean-install` after cloning the repo, then
 `npm run dev` will build the TS to JS in watch mode, and `npm run build` will
 build it without watch mode.
 
-The are currently not tests. Please consider helping out by making a pull
-request to add missing interfaces, APIs, tests, or performance improvements. :]
+Any help would be greatly appreciated, as this is a purely free time unpaid
+project. If you'd like to contribute, a pull request to add missing features,
+APIs, tests, or performance improvements would be awesome. :]
 
 ## Miscellaneous
 

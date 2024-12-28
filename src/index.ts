@@ -1,11 +1,9 @@
 export * from './DOMMatrix.js'
-export * from './DOMMatrixReadOnly.js'
 export * from './DOMPoint.js'
 export * from './DOMQuad.js'
 export * from './DOMRect.js'
 
-import {DOMMatrixReadOnly} from './DOMMatrixReadOnly.js'
-import {DOMMatrix} from './DOMMatrix.js'
+import {DOMMatrix, DOMMatrixReadOnly} from './DOMMatrix.js'
 import {DOMPoint, DOMPointReadOnly} from './DOMPoint.js'
 import {DOMQuad} from './DOMQuad.js'
 import {DOMRect, DOMRectReadOnly} from './DOMRect.js'

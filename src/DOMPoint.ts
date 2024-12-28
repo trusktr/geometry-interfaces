@@ -29,7 +29,7 @@ export class DOMPointReadOnly {
 		return this[w_]
 	}
 
-	matrixTransform(_matrix: DOMMatrixReadOnly): DOMPoint {
+	matrixTransform(_matrix: DOMMatrixInit): DOMPoint {
 		throw new Error('matrixTransform is not implemented yet.')
 
 		// TODO
