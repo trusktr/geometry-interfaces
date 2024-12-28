@@ -28,5 +28,5 @@ if (_global) {
     _global.DOMRect = DOMRect;
     _global.DOMRectReadOnly = DOMRectReadOnly;
 }
-export const version = '1.1.4';
+export const version = '2.0.0';
 //# sourceMappingURL=index.js.map

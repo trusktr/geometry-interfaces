@@ -32,4 +32,4 @@ if (_global) {
 	_global.DOMRectReadOnly = DOMRectReadOnly
 }
 
-export const version = '1.1.4'
+export const version = '2.0.0'
