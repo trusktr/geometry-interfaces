@@ -15,7 +15,7 @@ export declare class DOMMatrixReadOnly {
      * this.is2D is set false. Arrays of other lengths throw an error.
      */
     constructor(init?: string | ArrayLike<number>);
-    multiply(other: DOMMatrixReadOnly): DOMMatrix;
+    multiply(other?: DOMMatrixInit): DOMMatrix;
     translate(tx?: number, ty?: number, tz?: number): DOMMatrix;
     scale(scaleX?: number, scaleY?: number, scaleZ?: number, originX?: number, originY?: number, originZ?: number): DOMMatrix;
     scale3d(scale?: number, originX?: number, originY?: number, originZ?: number): DOMMatrix;
@@ -87,8 +87,8 @@ export declare class DOMMatrixReadOnly {
 }
 export declare class DOMMatrix extends DOMMatrixReadOnly {
     constructor(arg?: string | ArrayLike<number>);
-    multiplySelf(other: DOMMatrixInit): this;
-    preMultiplySelf(other: DOMMatrixReadOnly): this;
+    multiplySelf(other?: DOMMatrixInit): this;
+    preMultiplySelf(other?: DOMMatrixInit): this;
     translateSelf(tx?: number, ty?: number, tz?: number): this;
     scaleSelf(scaleX?: number, scaleY?: number, scaleZ?: number, originX?: number, originY?: number, originZ?: number): this;
     scale3dSelf(scale?: number, originX?: number, originY?: number, originZ?: number): this;

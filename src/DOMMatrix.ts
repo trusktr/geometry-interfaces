@@ -50,7 +50,7 @@ export class DOMMatrixReadOnly {
 
 	// Immutable transform methods -------------------------------------------
 
-	multiply(other: DOMMatrixReadOnly): DOMMatrix {
+	multiply(other?: DOMMatrixInit): DOMMatrix {
 		return new DOMMatrix(getInit(this)).multiplySelf(other)
 	}
 
@@ -265,8 +265,9 @@ export class DOMMatrix extends DOMMatrixReadOnly {
 	}
 
 	// Mutable transform methods
-	multiplySelf(other: DOMMatrixInit) {
-		if (!(other instanceof DOMMatrix)) throw new Error('The argument to multiplySelf must be an instance of DOMMatrix')
+	multiplySelf(other: DOMMatrixInit = new DOMMatrixReadOnly()) {
+		if (!(other instanceof DOMMatrixReadOnly))
+			throw new Error('The argument to multiplySelf must be an instance of DOMMatrixReadOnly')
 
 		// TODO: avoid creating a new array, just apply values directly.
 		multiplyAndApply(this, other, this)
@@ -276,9 +277,9 @@ export class DOMMatrix extends DOMMatrixReadOnly {
 		return this
 	}
 
-	preMultiplySelf(other: DOMMatrixReadOnly) {
-		if (!(other instanceof DOMMatrix))
-			throw new Error('The argument to preMultiplySelf must be an instance of DOMMatrix')
+	preMultiplySelf(other: DOMMatrixInit = new DOMMatrixReadOnly()) {
+		if (!(other instanceof DOMMatrixReadOnly))
+			throw new Error('The argument to preMultiplySelf must be an instance of DOMMatrixReadOnly')
 
 		// TODO: avoid creating a new array, just apply values directly.
 		multiplyAndApply(other, this, this)

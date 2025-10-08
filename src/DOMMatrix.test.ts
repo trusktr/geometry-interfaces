@@ -23,6 +23,11 @@ describe('DOMMatrixReadOnly', () => {
 		nativeMat = nativeMat.multiply(new window.DOMMatrix([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]))
 
 		expectMatricesEqual(polyfillMat, nativeMat)
+
+		polyfillMat.multiply()
+		nativeMat.multiply()
+
+		expectMatricesEqual(polyfillMat, nativeMat)
 	})
 
 	it('translate', () => {
@@ -328,6 +333,11 @@ describe('DOMMatrix', () => {
 		nativeMat.multiplySelf(new window.DOMMatrix([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]))
 
 		expectMatricesEqual(polyfillMat, nativeMat)
+
+		polyfillMat.multiplySelf()
+		nativeMat.multiplySelf()
+
+		expectMatricesEqual(polyfillMat, nativeMat)
 	})
 
 	it('preMultiplySelf', () => {
@@ -336,6 +346,11 @@ describe('DOMMatrix', () => {
 
 		polyfillMat.preMultiplySelf(new DOMMatrix([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]))
 		nativeMat.preMultiplySelf(new window.DOMMatrix([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]))
+
+		expectMatricesEqual(polyfillMat, nativeMat)
+
+		polyfillMat.preMultiplySelf()
+		nativeMat.preMultiplySelf()
 
 		expectMatricesEqual(polyfillMat, nativeMat)
 	})

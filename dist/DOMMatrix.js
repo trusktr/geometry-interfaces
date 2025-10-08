@@ -230,18 +230,18 @@ export class DOMMatrix extends DOMMatrixReadOnly {
             throw new Error('Invalid argument to DOMMatrix constructor.');
     }
     // Mutable transform methods
-    multiplySelf(other) {
-        if (!(other instanceof DOMMatrix))
-            throw new Error('The argument to multiplySelf must be an instance of DOMMatrix');
+    multiplySelf(other = new DOMMatrixReadOnly()) {
+        if (!(other instanceof DOMMatrixReadOnly))
+            throw new Error('The argument to multiplySelf must be an instance of DOMMatrixReadOnly');
         // TODO: avoid creating a new array, just apply values directly.
         multiplyAndApply(this, other, this);
         if (!other[is2D])
             this[is2D] = false;
         return this;
     }
-    preMultiplySelf(other) {
-        if (!(other instanceof DOMMatrix))
-            throw new Error('The argument to preMultiplySelf must be an instance of DOMMatrix');
+    preMultiplySelf(other = new DOMMatrixReadOnly()) {
+        if (!(other instanceof DOMMatrixReadOnly))
+            throw new Error('The argument to preMultiplySelf must be an instance of DOMMatrixReadOnly');
         // TODO: avoid creating a new array, just apply values directly.
         multiplyAndApply(other, this, this);
         if (!other[is2D])
