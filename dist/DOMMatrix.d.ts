@@ -29,7 +29,7 @@ export declare class DOMMatrixReadOnly {
     flipX(): DOMMatrix;
     flipY(): DOMMatrix;
     inverse(): DOMMatrix;
-    transformPoint(_point: DOMPointInit): DOMPoint;
+    transformPoint(point?: DOMPointInit): DOMPoint;
     toFloat32Array(): Float32Array;
     toFloat64Array(): Float64Array;
     toString(): string;

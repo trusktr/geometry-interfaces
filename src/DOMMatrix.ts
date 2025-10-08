@@ -101,8 +101,8 @@ export class DOMMatrixReadOnly {
 		throw new Error('inverse is not implemented yet.')
 	}
 
-	transformPoint(_point: DOMPointInit): DOMPoint {
-		throw new Error('transformPoint is not implemented yet.')
+	transformPoint(point?: DOMPointInit): DOMPoint {
+		return DOMPoint.fromPoint(point).matrixTransform(this)
 	}
 
 	toFloat32Array() {
